@@ -3,12 +3,15 @@
 import React from 'react';
 import {AppsStore} from '../../stores/AppsStore.js'
 
+var DatePicker = require('react-datepicker')
+
 export default class AppsList extends React.Component {
     constructor() {
         super();
         this.setApps = this.setApps.bind(this);
         this.getApps = this.getApps.bind(this);
         this._onChange = this._onChange.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     componentDidMount() {
@@ -32,6 +35,7 @@ export default class AppsList extends React.Component {
     }
 
     render() {
+        console.log("RENDER")
         var data = this.state !== null ? this.state.data : [];
         if(data == null) {
             data = []
@@ -63,14 +67,19 @@ export default class AppsList extends React.Component {
                             var app = data.apps[i]
                             return(
                                 <tr>
-                                    <td><img src={app.icon} style={iconStyle}/>    </td>
-                                    <td><h4> <a data-bind="attr: { href: urlPath }, text: name" /></h4></td>
-                                    <td data-bind="text: description"></td>
-                                    <td><a data-bind="attr: { href: url }" target="_blank">URL</a></td>
-                                    <td><a data-bind="attr: { href: shortUrl }" target="_blank">Short URL</a></td>
-                                    <td><input data-bind="value: createdAt" type="text" name="datepicker" /></td>
-                                    <td data-bind="text: createdBy"></td>
-                                    <td data-bind="text: status"> {app.status}</td>
+                                    <td><img src={app.icon} style={iconStyle}/></td>
+                                    <td><h4> <a href={app.urlPath}>{app.name}</a></h4></td>
+                                    <td>{app.description}</td>
+                                    <td><a href={app.url} target="_blank">URL</a></td>
+                                    <td><a href={app.shortUrl} target="_blank">Short URL</a></td>
+                                    <td>
+                                        <DatePicker
+                                            key="example2"
+                                            dateFormat="YYYY/MM/DD"
+                                            />
+                                    </td>
+                                    <td>{app.createdBy}</td>
+                                    <td>{app.status}</td>
                                     <td>
                                         <label data-bind="text: votesCount"></label>
                                         <div>

@@ -25,15 +25,12 @@ export var AppsAPI = {
             }
 
             if(callback !== undefined && callback !== null) {
-                console.log(data)
                 callback(data);
             }
         });
     },
     getApps: function(platform) {
-        console.log("AAAAAAAA")
         this._getApps(new Date(), platform, "all", 5, 1, function(data) {
-            console.log(AppsActions.loadApps)
             AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: platform});
         })
     },
