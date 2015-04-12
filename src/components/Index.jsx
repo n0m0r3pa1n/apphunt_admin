@@ -1,8 +1,10 @@
 'use strict';
 
 import React from 'react';
-import App from './App/App.jsx';
+import AppsList from './AppsList/AppsList.jsx';
 import Nav from './App/Nav.jsx';
+
+import {AppsAPI} from '../api/AppsAPI.js'
 
 (function () {
     var React = require('react'),
@@ -14,8 +16,8 @@ import Nav from './App/Nav.jsx';
     window.React = React;
 
     var routes = (
-        <Route handler={App} path="/">
-            <DefaultRoute handler={App} />
+        <Route handler={AppsList} path="/">
+            <DefaultRoute handler={AppsList} />
         </Route>
     );
 
@@ -28,6 +30,8 @@ import Nav from './App/Nav.jsx';
         var params = state.params;
         React.render(<Handler params={params} />, document.getElementById('content'));
     });
+
+    AppsAPI.getApps("Android");
 
     injectTapEventPlugin();
 })();

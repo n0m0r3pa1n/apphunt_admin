@@ -4,6 +4,6 @@ import React from 'react';
 
 export default class App extends React.Component {
     render() {
-        return <div>Om nom nom</div>
+        return <div>Page Not Found</div>
     }
 }

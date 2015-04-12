@@ -3,7 +3,9 @@
 import Flux from 'flux';
 import assign from 'react/lib/Object.assign';
 
-let Dispatcher = assign(new Flux.Dispatcher(), {
+var PayloadSources = require('../constants/PayloadConstants')
+
+export var Dispatcher = assign(new Flux.Dispatcher(), {
 
     /**
      * @param {object} action The details of the action, including the action's
@@ -30,5 +32,3 @@ let Dispatcher = assign(new Flux.Dispatcher(), {
     }
 
 });
-
-export default Dispatcher;
