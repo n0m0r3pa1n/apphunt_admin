@@ -30,11 +30,5 @@ let Dispatcher = assign(new Flux.Dispatcher(), {
     }
 
 });
-let a = "dadsadas"
-console.log(a);
-console.log(a);
-console.log(a);
-console.log(a);
-console.log(a);
 
 export default Dispatcher;

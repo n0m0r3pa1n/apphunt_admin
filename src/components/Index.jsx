@@ -2,9 +2,35 @@
 
 import React from 'react';
 import App from './App/App.jsx';
+import Nav from './App/Nav.jsx';
 
-React.render(
-<App />,
-    document.getElementById('body')
-);
+(function () {
+    var React = require('react'),
+        injectTapEventPlugin = require("react-tap-event-plugin"),
+        Router = require("react-router"),
+        Route = Router.Route,
+        HashLocation = Router.HashLocation,
+        DefaultRoute = Router.DefaultRoute;
+    window.React = React;
 
+    var routes = (
+        <Route handler={App} path="/">
+            <DefaultRoute handler={App} />
+        </Route>
+    );
+
+    React.render(
+        <Nav />,
+            document.getElementById('nav')
+    );
+
+    Router.run(routes, HashLocation, function (Handler, state) {
+        var params = state.params;
+        React.render(<Handler params={params} />, document.getElementById('content'));
+    });
+
+    injectTapEventPlugin();
+})();
+
+//
+//
