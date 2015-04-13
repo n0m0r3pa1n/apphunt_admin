@@ -9,13 +9,14 @@ import {DateUtils} from '../utils/DateUtils.js'
 import {AppsActions} from '../actions/AppsActions.js'
 
 export var AppsAPI = {
+    url: "",
     getAppsForDate: function(date, platform, status, pageSize, page, callback) {
         lastAppsDate = date;
         lastAppsPlatform = platform;
         var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
 
-        var url = baseURL + "apps?date="+dateStr+"&platform="+platform+"&status=approved&pageSize="+pageSize+"&page=" + page;
-        $.get(url, function(data, status) {
+        this.url = baseURL + "apps?date="+dateStr+"&platform="+platform+"&status=approved&pageSize="+pageSize+"&page=" + page;
+        $.get(this.url, function(data, status) {
             var apps = []
             for(var i=0; i< data.apps.length; i++) {
                 var app = data.apps[i]
@@ -39,8 +40,8 @@ export var AppsAPI = {
             dateStr = ""
         }
 
-        var url = baseURL + "apps?"+dateStr+"platform="+platform+"&status="+status+"&pageSize="+pageSize+"&page=" + page;
-        $.get(url, function(data, status) {
+        this.url = baseURL + "apps?"+dateStr+"platform="+platform+"&status="+status+"&pageSize="+pageSize+"&page=" + page;
+        $.get(this.url, function(data, status) {
             var apps = []
             for(var i=0; i< data.apps.length; i++) {
                 var app = data.apps[i]
@@ -48,7 +49,6 @@ export var AppsAPI = {
                 app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
                 apps.push(app)
             }
-            console.log(data)
             AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: platform});
         });
     },
@@ -61,6 +61,19 @@ export var AppsAPI = {
         lastAppsDate.setDate(lastAppsDate.getDate() - 1)
         AppsAPI.getAppsForDate(lastAppsDate, lastAppsPlatform, "all", 5, 1, function(data) {
             AppsActions.receiveApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: lastAppsPlatform});
+        });
+    },
+    reloadApps: function() {
+        $.get(this.url, function(data, status) {
+            var apps = []
+            for(var i=0; i< data.apps.length; i++) {
+                var app = data.apps[i]
+                app.icon = app.icon === undefined ? "" : app.icon
+                app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
+                apps.push(app)
+            }
+
+            AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: lastAppsPlatform});
         });
     }
 };

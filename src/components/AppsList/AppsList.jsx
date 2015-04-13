@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {AppsStore} from '../../stores/AppsStore.js'
+import {VotesAPI} from '../../api/VotesAPI.js'
 import SearchForm from './SearchForm.jsx'
 
 var DatePicker = require('react-datepicker-component/DatePicker.jsx')
@@ -10,6 +11,8 @@ var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
 export default class AppsList extends React.Component {
     constructor() {
         super();
+        this.vote = this.vote.bind(this)
+        this.unvote = this.unvote.bind(this)
         this.setApps = this.setApps.bind(this);
         this.getApps = this.getApps.bind(this);
         this._onChange = this._onChange.bind(this);
@@ -35,6 +38,14 @@ export default class AppsList extends React.Component {
     }
     getApps() {
         return this.data
+    }
+
+    vote(id){
+        VotesAPI.vote(id);
+    }
+
+    unvote(id) {
+        VotesAPI.unvote(id);
     }
 
     render() {
@@ -83,12 +94,12 @@ export default class AppsList extends React.Component {
                                     <td>{app.createdBy}</td>
                                     <td>{app.status}</td>
                                     <td>
-                                        <label data-bind="text: votesCount"></label>
+                                        <label>{app.votesCount}</label>
                                         <div>
-                                            <button  className="btn btn-success" data-bind="click:  function() { vote(_id) }">
+                                            <button  className="btn btn-success" onClick={this.vote.bind(this, app._id)} >
                                                 <span className="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
                                             </button>
-                                            <button  className="btn btn-danger" data-bind="click:  function() { unvote(_id) }">
+                                            <button  className="btn btn-danger" onClick={this.unvote.bind(this, app._id)}>
                                                 <span className="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                                             </button>
                                         </div>
