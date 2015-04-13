@@ -4,6 +4,7 @@ import React from 'react';
 import {AppsStore} from '../../stores/AppsStore.js'
 import {VotesAPI} from '../../api/VotesAPI.js'
 import SearchForm from './SearchForm.jsx'
+import AppActions from '../App/AppActions.jsx'
 
 var DatePicker = require('react-datepicker-component/DatePicker.jsx')
 var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
@@ -81,6 +82,7 @@ export default class AppsList extends React.Component {
                     {
                         Object.keys(apps).map( (field, i) => {
                             var app = data.apps[i]
+                            var userType = app.createdBy.loginType != 'fake' ? 'real' : 'fake'
                             return(
                                 <tr>
                                     <td><img src={app.icon} style={iconStyle}/></td>
@@ -91,7 +93,7 @@ export default class AppsList extends React.Component {
                                     <td>
                                         <DatePickerInput date={new Date(app.createdAt)}  />
                                     </td>
-                                    <td>{app.createdBy}</td>
+                                    <td>{app.createdBy} ({app.creatorType})</td>
                                     <td>{app.status}</td>
                                     <td>
                                         <label>{app.votesCount}</label>
@@ -105,11 +107,7 @@ export default class AppsList extends React.Component {
                                         </div>
                                     </td>
                                     <td>
-                                        <div data-bind="if: status ==='waiting'">
-                                            <button className="btn btn-primary" data-bind="click:  function() { approve(package) }">Approve</button>
-                                        </div>
-                                        <button className="btn btn-danger" data-bind="click:  function() { reject(package) }">Reject</button>
-                                        <button className="btn btn-success" data-bind="click:  function() { save(package) }">Save</button>
+                                        <AppActions app={app} />
                                     </td>
                                 </tr>
                             )

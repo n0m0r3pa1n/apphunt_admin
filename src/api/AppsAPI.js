@@ -16,15 +16,8 @@ export var AppsAPI = {
         var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
         this.url = baseURL + "apps?date="+dateStr+"&platform="+platform+"&status="+status+"&pageSize="+pageSize+"&page=" + page;
         $.get(this.url, function(data, status) {
-            var apps = []
-            for(var i=0; i< data.apps.length; i++) {
-                var app = data.apps[i]
-                app.icon = app.icon === undefined ? "" : app.icon
-                app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
-                apps.push(app)
-            }
-
             if(callback !== undefined && callback !== null) {
+                data.apps = getFormattedApps(data.apps)
                 callback(data);
             }
         });
@@ -41,14 +34,7 @@ export var AppsAPI = {
 
         this.url = baseURL + "apps?"+dateStr+"platform="+platform+"&status="+status+"&pageSize="+pageSize+"&page=" + page;
         $.get(this.url, function(data, status) {
-            var apps = []
-            for(var i=0; i< data.apps.length; i++) {
-                var app = data.apps[i]
-                app.icon = app.icon === undefined ? "" : app.icon
-                app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
-                apps.push(app)
-            }
-            AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: platform});
+            AppsActions.loadApps({apps: getFormattedApps(data.apps), date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: platform});
         });
     },
     getApps: function(platform) {
@@ -64,15 +50,20 @@ export var AppsAPI = {
     },
     reloadApps: function() {
         $.get(this.url, function(data, status) {
-            var apps = []
-            for(var i=0; i< data.apps.length; i++) {
-                var app = data.apps[i]
-                app.icon = app.icon === undefined ? "" : app.icon
-                app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
-                apps.push(app)
-            }
-
-            AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: lastAppsPlatform});
+            AppsActions.loadApps({apps: getFormattedApps(data.apps), date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: lastAppsPlatform});
         });
     }
 };
+
+function getFormattedApps(apps) {
+    var newApps = []
+    for(var i=0; i< apps.length; i++) {
+        var app = apps[i]
+        app.icon = app.icon === undefined ? "" : app.icon
+        app.creatorType = app.createdBy.loginType != 'fake' ? 'real' : 'fake'
+        app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
+        newApps.push(app)
+    }
+
+    return newApps;
+}
