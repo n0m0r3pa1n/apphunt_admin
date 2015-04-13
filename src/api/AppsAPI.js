@@ -9,7 +9,7 @@ import {DateUtils} from '../utils/DateUtils.js'
 import {AppsActions} from '../actions/AppsActions.js'
 
 export var AppsAPI = {
-    _getApps: function(date, platform, status, pageSize, page, callback) {
+    getAppsForDate: function(date, platform, status, pageSize, page, callback) {
         lastAppsDate = date;
         lastAppsPlatform = platform;
         var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
@@ -30,13 +30,13 @@ export var AppsAPI = {
         });
     },
     getApps: function(platform) {
-        this._getApps(new Date(), platform, "all", 5, 1, function(data) {
+        this.getAppsForDate(new Date(), platform, "all", 5, 1, function(data) {
             AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: platform});
         })
     },
     getAppsForPreviousDay: function (page) {
         lastAppsDate.setDate(lastAppsDate.getDate() - 1)
-        AppsAPI._getApps(lastAppsDate, lastAppsPlatform, "all", 5, 1, function(data) {
+        AppsAPI.getAppsForDate(lastAppsDate, lastAppsPlatform, "all", 5, 1, function(data) {
             AppsActions.receiveApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: lastAppsPlatform});
         });
     }
