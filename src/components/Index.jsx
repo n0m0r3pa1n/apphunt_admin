@@ -8,7 +8,6 @@ import {AppsAPI} from '../api/AppsAPI.js'
 
 (function () {
     var React = require('react'),
-        injectTapEventPlugin = require("react-tap-event-plugin"),
         Router = require("react-router"),
         Route = Router.Route,
         HashLocation = Router.HashLocation,
@@ -33,7 +32,6 @@ import {AppsAPI} from '../api/AppsAPI.js'
 
     AppsAPI.getApps("Android");
 
-    injectTapEventPlugin();
 })();
 
 //

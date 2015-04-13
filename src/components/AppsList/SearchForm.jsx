@@ -5,8 +5,10 @@ import {AppsStore} from '../../stores/AppsStore.js'
 import {AppsAPI} from '../../api/AppsAPI.js'
 import {DateUtils} from '../../utils/DateUtils.js'
 
+var $ = require('jquery')
 var Select = require('react-select');
 var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
+import {AddApp} from '../App/AddApp.jsx'
 
 var options = [
     { value: 'all', label: 'All'},
@@ -22,6 +24,7 @@ export default class SearchForm extends React.Component {
         this.currentStatus = "all"
         this.currentDate = new Date()
         this.shouldFilterAllApps = false;
+
         this._onPlatformChange = this._onPlatformChange.bind(this);
         this._onStatusChange = this._onStatusChange.bind(this);
         this._onDateChange = this._onDateChange.bind(this);
@@ -66,6 +69,7 @@ export default class SearchForm extends React.Component {
     }
 
     render() {
+
         return (
             <div className="col-md-offset-1 col-lg-12 panel-heading">
                 <div className="form-inline">
@@ -92,12 +96,8 @@ export default class SearchForm extends React.Component {
                             />
                     </div>
                     <div className="input-group-lg col-lg-3">
-                        <button id="get_apps" className="btn btn-primary">
-                            <span className="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                        </button>
-                        <button id="add_app" className="btn btn-success">
-                            <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </button>
+                        <AddApp />
+
                     </div>
                 </div>
             </div>);
