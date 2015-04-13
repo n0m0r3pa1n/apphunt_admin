@@ -14,8 +14,7 @@ export var AppsAPI = {
         lastAppsDate = date;
         lastAppsPlatform = platform;
         var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-
-        this.url = baseURL + "apps?date="+dateStr+"&platform="+platform+"&status=approved&pageSize="+pageSize+"&page=" + page;
+        this.url = baseURL + "apps?date="+dateStr+"&platform="+platform+"&status="+status+"&pageSize="+pageSize+"&page=" + page;
         $.get(this.url, function(data, status) {
             var apps = []
             for(var i=0; i< data.apps.length; i++) {
@@ -53,13 +52,13 @@ export var AppsAPI = {
         });
     },
     getApps: function(platform) {
-        this.getAppsForDate(new Date(), platform, "all", 5, 1, function(data) {
+        this.getAppsForDate(new Date(), platform, "all", 40, 1, function(data) {
             AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: platform});
         })
     },
     getAppsForPreviousDay: function (page) {
         lastAppsDate.setDate(lastAppsDate.getDate() - 1)
-        AppsAPI.getAppsForDate(lastAppsDate, lastAppsPlatform, "all", 5, 1, function(data) {
+        AppsAPI.getAppsForDate(lastAppsDate, lastAppsPlatform, "all", 40, 1, function(data) {
             AppsActions.receiveApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: lastAppsPlatform});
         });
     },

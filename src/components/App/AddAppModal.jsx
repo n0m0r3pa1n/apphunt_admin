@@ -6,6 +6,9 @@ var OverlayMixin = ReactBootstrap.OverlayMixin
 var Button = ReactBootstrap.Button
 var Modal = ReactBootstrap.Modal
 
+import {AppsStore} from '../../stores/AppsStore.js'
+import {AppAPI} from '../../api/AppAPI.js'
+
 export var AddAppModal = React.createClass({
     getInitialState() {
         return {
@@ -22,19 +25,32 @@ export var AddAppModal = React.createClass({
 
     _submitApp() {
         let platform =  React.findDOMNode(this.refs.platform).value;
-        console.log(platform)
+        let appPackage = React.findDOMNode(this.refs.package).value;
+        let appDescription = React.findDOMNode(this.refs.app_description).value;
+
+        AppAPI.addApp(platform, appPackage, appDescription);
+    },
+    componentDidMount() {
+        AppsStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount() {
+        AppsStore.removeChangeListener(this._onChange);
+    },
+
+    _onChange(data) {
+        this.handleToggle()
     },
 
     render() {
         let isModalOpen = this.state.isModalOpen;
-
-
         if (!isModalOpen) {
             return <span/>;
         }
 
         return (
             <Modal bsStyle='primary' title='Add new app' onRequestHide={this.handleToggle}>
+                <form>
                 <div className="modal-content">
                     <div className="modal-body">
                         <div className="form-group">
@@ -45,12 +61,12 @@ export var AddAppModal = React.createClass({
                         </div>
                         <div className="form-group">
                             <label>Package/ ID</label>
-                            <input type="text" name="package" className="form-control"/>
+                            <input type="text" ref="package" className="form-control" required="required" pattern="[A-Za-z0-9]{1,20}"/>
                         </div>
                         <div className="form-group">
                             <label>Description</label>
                             <label>(characters left) : <span id="chars_left"></span></label>
-                            <textarea className="form-control" id="app_description" maxlength="100"></textarea>
+                            <textarea className="form-control" ref="app_description" required="required" pattern="[A-Za-z0-9]{1,20}" maxlength="100"></textarea>
                         </div>
                     </div>
                     <div className="modal-footer">
@@ -58,6 +74,7 @@ export var AddAppModal = React.createClass({
                         <Button onClick={this.handleToggle}>Close</Button>
                     </div>
                 </div>
+                    </form>
             </Modal>
         );
     }

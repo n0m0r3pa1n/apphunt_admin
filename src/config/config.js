@@ -1,0 +1,1 @@
+export var BASE_URL = "https://apphunt.herokuapp.com/"

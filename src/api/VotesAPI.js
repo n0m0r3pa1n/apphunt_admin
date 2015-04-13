@@ -1,21 +1,13 @@
 'use strict';
 
 import {AppsAPI} from '../api/AppsAPI.js'
+import {UsersAPI} from '../api/UsersAPI.js'
+import {BASE_URL} from '../config/config.js'
 var $ = require("jquery")
-
-var baseURL = "https://apphunt.herokuapp.com/"
-var fakeUsersIds = []
-
-$.get(baseURL + "users?loginType=fake", function(data, status) {
-    var users = data
-    users.forEach(function(user) {
-        fakeUsersIds.push(user._id)
-    })
-});
 
 export var VotesAPI = {
     vote: function(appId) {
-        var url = baseURL + "apps/votes?userId=" + getRandomUserId() + "&appId=" + appId;
+        var url = BASE_URL + "apps/votes?userId=" + UsersAPI.getRandomUserId() + "&appId=" + appId;
         $.ajax({
             url: url,
             type: 'POST',
@@ -28,7 +20,7 @@ export var VotesAPI = {
         });
     },
     unvote: function(appId) {
-        var url = baseURL + "apps/votes?userId=" + getRandomUserId() + "&appId=" + appId;
+        var url = BASE_URL + "apps/votes?userId=" + getRandomUserId() + "&appId=" + appId;
         $.ajax({
             url: url,
             type: 'DELETE',
@@ -41,8 +33,3 @@ export var VotesAPI = {
         });
     }
 };
-
-function getRandomUserId() {
-    var index = Math.floor(Math.random() * fakeUsersIds.length)
-    return fakeUsersIds[index]
-}
