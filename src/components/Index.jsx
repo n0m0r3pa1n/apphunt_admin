@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import AppsList from './AppsList/AppsList.jsx';
+import AppsListPage from './AppsList/AppsListPage.jsx';
 import Nav from './App/Nav.jsx';
 
 import {AppsAPI} from '../api/AppsAPI.js'
@@ -16,8 +16,8 @@ import {AppsAPI} from '../api/AppsAPI.js'
     window.React = React;
 
     var routes = (
-        <Route handler={AppsList} path="/">
-            <DefaultRoute handler={AppsList} />
+        <Route handler={AppsListPage} path="/">
+            <DefaultRoute handler={AppsListPage} />
         </Route>
     );
 

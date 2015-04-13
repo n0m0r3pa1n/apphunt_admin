@@ -30,11 +30,16 @@ export var AppsAPI = {
         });
     },
     getAppsWithoutCallback: function(date, platform, status, pageSize, page) {
-        lastAppsDate = date;
-        lastAppsPlatform = platform;
-        var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+        var dateStr = "date=";
+        if(date !== "") {
+            lastAppsDate = date;
+            lastAppsPlatform = platform;
+            dateStr += date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + '&'
+        } else {
+            dateStr = ""
+        }
 
-        var url = baseURL + "apps?date="+dateStr+"&platform="+platform+"&status=approved&pageSize="+pageSize+"&page=" + page;
+        var url = baseURL + "apps?"+dateStr+"platform="+platform+"&status="+status+"&pageSize="+pageSize+"&page=" + page;
         $.get(url, function(data, status) {
             var apps = []
             for(var i=0; i< data.apps.length; i++) {
@@ -43,7 +48,7 @@ export var AppsAPI = {
                 app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
                 apps.push(app)
             }
-
+            console.log(data)
             AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: platform});
         });
     },

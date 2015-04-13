@@ -9,20 +9,23 @@ var Select = require('react-select');
 var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
 
 var options = [
-    { value: 'All', label: 'All'},
-    { value: 'Approved', label: 'Approved'},
-    { value: 'Waiting', label: 'Waiting' },
-    { value: 'Rejected', label: 'Rejected' }
+    { value: 'all', label: 'All'},
+    { value: 'approved', label: 'Approved'},
+    { value: 'waiting', label: 'Waiting' },
+    { value: 'rejected', label: 'Rejected' }
 ];
 
 export default class SearchForm extends React.Component {
     constructor() {
         super();
         this.currentPlatform = "Android"
+        this.currentStatus = "all"
         this.currentDate = new Date()
+        this.shouldFilterAllApps = false;
         this._onPlatformChange = this._onPlatformChange.bind(this);
         this._onStatusChange = this._onStatusChange.bind(this);
         this._onDateChange = this._onDateChange.bind(this);
+        this._shouldShowAllApps = this._shouldShowAllApps.bind(this);
     }
 
     componentDidMount() {
@@ -41,21 +44,30 @@ export default class SearchForm extends React.Component {
             return;
         }
 
-        console.log(this.currentPlatform)
+        this.currentStatus = status;
+        this._getApps()
     }
     _onDateChange(date) {
-        console.log(DateUtils.formatDate(date))
         this.currentDate = date;
         this._getApps()
     }
 
+    _shouldShowAllApps(event) {
+        this.shouldFilterAllApps = event.target.checked
+        this._getApps()
+    }
+
     _getApps() {
-        AppsAPI.getAppsWithoutCallback(this.currentDate, this.currentPlatform, "all", 100, 1);
+        let date = this.currentDate;
+        if(this.shouldFilterAllApps == true) {
+            date = ""
+        }
+        AppsAPI.getAppsWithoutCallback(date, this.currentPlatform, this.currentStatus, 40, 1);
     }
 
     render() {
         return (
-            <div className="col-md-offset-1 col-lg-10 panel-heading">
+            <div className="col-md-offset-1 col-lg-12 panel-heading">
                 <div className="form-inline">
                     <div className="input-group-lg col-lg-2">
                         <form>
@@ -66,22 +78,27 @@ export default class SearchForm extends React.Component {
                         </form>
                     </div>
                     <div className="input-group-lg col-lg-3">
-                        <label>Date: <DatePickerInput date={this.currentDate}  dateFormatter={DateUtils.formatDate} onChangeDate={this._onDateChange}/></label>
+                        <DatePickerInput date={this.currentDate}  dateFormatter={DateUtils.formatDate} onChangeDate={this._onDateChange}/>
                     </div>
-                    <div className="input-group-lg col-lg-4">
+                    <div className="input-group-lg col-lg-1">
+                        <label>All apps: <input type="checkbox" onChange={this._shouldShowAllApps}/></label>
+                    </div>
+                    <div className="input-group-lg col-lg-2">
                         <Select
                             name="platform"
-                            value="All"
+                            value={this.currentStatus}
                             options={options}
                             onChange={this._onStatusChange}
                             />
                     </div>
-                    <button id="get_apps" className="btn btn-primary">
-                        <span className="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                    </button>
-                    <button id="add_app" className="btn btn-success">
-                        <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>
+                    <div className="input-group-lg col-lg-3">
+                        <button id="get_apps" className="btn btn-primary">
+                            <span className="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                        </button>
+                        <button id="add_app" className="btn btn-success">
+                            <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
             </div>);
     }

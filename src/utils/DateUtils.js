@@ -1,5 +1,9 @@
 export var DateUtils = {
     getDoubleDigitDate: function(dateStr) {
+        if(dateStr === "") {
+            return;
+        }
+
         var split = dateStr.split('-');
         var year = split[0];
         var month = split[1];
@@ -16,6 +20,9 @@ export var DateUtils = {
         return year + "-" + month + "-" + day;
     },
     formatDate: function(date) {
+        if(date === '') {
+            return;
+        }
         var output = '';
         output+=date.getFullYear() + '-';
         output+=date.getMonth()+1+'-';
