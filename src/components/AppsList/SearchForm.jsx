@@ -97,7 +97,6 @@ export default class SearchForm extends React.Component {
                     </div>
                     <div className="input-group-lg col-lg-3">
                         <AddApp />
-
                     </div>
                 </div>
             </div>);
