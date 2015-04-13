@@ -4,7 +4,6 @@ import React from 'react';
 import {AppsStore} from '../../stores/AppsStore.js'
 import SearchForm from './SearchForm.jsx'
 
-//var DatePicker = require('react-datepicker')
 var DatePicker = require('react-datepicker-component/DatePicker.jsx')
 var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
 
@@ -72,7 +71,6 @@ export default class AppsList extends React.Component {
                         <tbody>
                         {
                             Object.keys(apps).map( (field, i) => {
-                                console.log(data)
                                 var app = data.apps[i]
                                 return(
                                     <tr>

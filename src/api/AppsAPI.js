@@ -29,6 +29,24 @@ export var AppsAPI = {
             }
         });
     },
+    getAppsWithoutCallback: function(date, platform, status, pageSize, page) {
+        lastAppsDate = date;
+        lastAppsPlatform = platform;
+        var dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+
+        var url = baseURL + "apps?date="+dateStr+"&platform="+platform+"&status=approved&pageSize="+pageSize+"&page=" + page;
+        $.get(url, function(data, status) {
+            var apps = []
+            for(var i=0; i< data.apps.length; i++) {
+                var app = data.apps[i]
+                app.icon = app.icon === undefined ? "" : app.icon
+                app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
+                apps.push(app)
+            }
+
+            AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: platform});
+        });
+    },
     getApps: function(platform) {
         this.getAppsForDate(new Date(), platform, "all", 5, 1, function(data) {
             AppsActions.loadApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: platform});

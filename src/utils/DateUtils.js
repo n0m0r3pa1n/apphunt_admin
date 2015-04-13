@@ -14,5 +14,12 @@ export var DateUtils = {
         }
 
         return year + "-" + month + "-" + day;
+    },
+    formatDate: function(date) {
+        var output = '';
+        output+=date.getFullYear() + '-';
+        output+=date.getMonth()+1+'-';
+        output+=date.getDate();
+        return output;
     }
 };
