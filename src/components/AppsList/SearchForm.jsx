@@ -8,7 +8,7 @@ import {DateUtils} from '../../utils/DateUtils.js'
 var $ = require('jquery')
 var Select = require('react-select');
 var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
-import {AddApp} from '../App/AddApp.jsx'
+import {AddApp} from '../App/Add/AddApp.jsx'
 
 var options = [
     { value: 'all', label: 'All'},

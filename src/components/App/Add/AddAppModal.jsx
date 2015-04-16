@@ -6,8 +6,8 @@ var OverlayMixin = ReactBootstrap.OverlayMixin
 var Button = ReactBootstrap.Button
 var Modal = ReactBootstrap.Modal
 
-import {AppsStore} from '../../stores/AppsStore.js'
-import {AppAPI} from '../../api/AppAPI.js'
+import {AppsStore} from '../../../stores/AppsStore.js'
+import {AppAPI} from '../../../api/AppAPI.js'
 
 export var AddAppModal = React.createClass({
     getInitialState() {

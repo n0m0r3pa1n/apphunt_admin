@@ -7,9 +7,14 @@ cd <project folder>
 npm install
 ```
 
+Fix react-datepicker-component project which is not updated in the npm repository in:
+node_modules -> react-datepicker-component -> DatePickerInput 63 row which contains this.transferProps to
+
+```
+<DatePicker {...this.props} date={this.props.date} show={this.state.show} onChangeDate={this.onChangeDate} />
+```
+
 Now you can run your local server:
 ```
 npm start
 ```
-
-This example is based on [Material UI](https://github.com/callemall/material-ui) Gulp example.

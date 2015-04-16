@@ -1,11 +1,10 @@
 'use strict';
-
+import {BASE_URL} from '../config/config.js'
 var $ = require("jquery")
 
-var baseURL = "https://apphunt.herokuapp.com/"
 var fakeUsersIds = []
 
-$.get(baseURL + "users?loginType=fake", function(data, status) {
+$.get(BASE_URL + "users?loginType=fake", function(data, status) {
     var users = data
     users.forEach(function(user) {
         fakeUsersIds.push(user._id)

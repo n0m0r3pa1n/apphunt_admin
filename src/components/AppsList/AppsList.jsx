@@ -6,8 +6,7 @@ import {VotesAPI} from '../../api/VotesAPI.js'
 import SearchForm from './SearchForm.jsx'
 import AppActions from '../App/AppActions.jsx'
 
-var DatePicker = require('react-datepicker-component/DatePicker.jsx')
-var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
+import {DateUtils} from '../../utils/DateUtils.js'
 
 export default class AppsList extends React.Component {
     constructor() {
@@ -86,14 +85,18 @@ export default class AppsList extends React.Component {
                             return(
                                 <tr>
                                     <td><img src={app.icon} style={iconStyle}/></td>
-                                    <td><h4> <a href={app.urlPath}>{app.name}</a></h4></td>
+                                    <td>
+                                        <h4> <a href={app.urlPath}>{app.name}</a></h4>
+                                        <img src="./img/ic_comment.png" width="16px"/>
+                                        <span>{app.commentsCount}</span>
+                                    </td>
                                     <td>{app.description}</td>
                                     <td><a href={app.url} target="_blank">URL</a></td>
                                     <td><a href={app.shortUrl} target="_blank">Short URL</a></td>
                                     <td>
-                                        <DatePickerInput date={new Date(app.createdAt)}  />
+                                        {DateUtils.formatDate(new Date(app.createdAt))}
                                     </td>
-                                    <td>{app.createdBy} ({app.creatorType})</td>
+                                    <td><a href={'mailto:' + app.createdByMail}>{app.createdBy}</a> ({app.creatorType})</td>
                                     <td>{app.status}</td>
                                     <td>
                                         <label>{app.votesCount}</label>

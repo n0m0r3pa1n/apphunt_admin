@@ -1,7 +1,8 @@
 'use strict';
+import {BASE_URL} from '../config/config.js'
 
 var $ = require("jquery")
-var baseURL = "https://apphunt.herokuapp.com/"
+var baseURL = BASE_URL
 var lastAppsDate = new Date();
 var lastAppsPlatform = "";
 
@@ -62,6 +63,7 @@ function getFormattedApps(apps) {
         app.icon = app.icon === undefined ? "" : app.icon
         app.creatorType = app.createdBy.loginType != 'fake' ? 'real' : 'fake'
         app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
+        app.createdByMail = app.createdBy.email !== undefined ? app.createdBy.email : ""
         newApps.push(app)
     }
 

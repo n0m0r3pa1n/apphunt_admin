@@ -1,14 +1,15 @@
 'use strict';
 
 import React from 'react';
-
+import {AppAPI} from '../../api/AppAPI.js'
+import {EditApp} from '../App/Edit/EditApp.jsx'
 
 export default class AppActions extends React.Component {
     constructor() {
         super();
         this._approve = this._approve.bind(this)
-        this._approve = this._approve.bind(this)
-        this._approve = this._approve.bind(this)
+        this._reject = this._reject.bind(this)
+        this._edit = this._edit.bind(this)
     }
 
     componentDidMount() {
@@ -18,15 +19,15 @@ export default class AppActions extends React.Component {
     }
 
     _approve() {
-        console.log("Approve")
+        AppAPI.changeAppStatus(this.props.app.package, 'approved')
     }
 
     _reject() {
-        console.log("R")
+        AppAPI.changeAppStatus(this.props.app.package, 'rejected')
     }
 
     _edit() {
-        console.log("S")
+        console.log("E")
     }
 
     render() {
@@ -36,7 +37,7 @@ export default class AppActions extends React.Component {
             <div className="">
                 {approveBtn}
                 <button className="btn btn-danger" onClick={this._reject}>Reject</button>
-                <button className="btn btn-success" onClick={this._edit}>Edit</button>
+                <EditApp app={this.props.app}/>
             </div>);
     }
 }
