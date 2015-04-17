@@ -37,8 +37,5 @@
     "require-dir": "^0.1.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.3.0"
-  },
-  "scripts": {
-    "start": "gulp"
   }
 }
