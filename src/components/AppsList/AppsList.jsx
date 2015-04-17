@@ -83,13 +83,14 @@ export default class AppsList extends React.Component {
                     {
                         Object.keys(apps).map( (field, i) => {
                             let app = data.apps[i]
+                            let commentsPath = '#/comments/' + app._id
                             let userType = app.createdBy.loginType != 'fake' ? 'real' : 'fake'
                             let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}>{app.createdBy}</a> : <div>{app.createdBy}</div>
                             return(
                                 <tr>
                                     <td><img src={app.icon} style={iconStyle}/></td>
                                     <td>
-                                        <h4> <a href={app.urlPath}>{app.name}</a></h4>
+                                        <h4> <a href={commentsPath}>{app.name}</a></h4>
                                         <img src="./img/ic_comment.png" width="16px"/>
                                         <span>{app.commentsCount}</span>
                                     </td>

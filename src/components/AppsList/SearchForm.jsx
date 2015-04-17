@@ -81,7 +81,7 @@ export default class SearchForm extends React.Component {
                             <label> iOS</label>
                         </form>
                     </div>
-                    <div className="input-group-lg col-lg-3">
+                    <div className="input-group-lg col-md-2">
                         <DatePickerInput date={this.currentDate}  dateFormatter={DateUtils.formatDate} onChangeDate={this._onDateChange}/>
                     </div>
                     <div className="input-group-lg col-lg-1">

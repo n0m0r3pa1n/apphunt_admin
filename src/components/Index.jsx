@@ -2,9 +2,8 @@
 
 import React from 'react';
 import AppsListPage from './AppsList/AppsListPage.jsx';
+import AppComments from './Comments/App/AppComments.js'
 import Nav from './App/Nav.jsx';
-
-import {AppsAPI} from '../api/AppsAPI.js'
 
 (function () {
     var React = require('react'),
@@ -15,8 +14,9 @@ import {AppsAPI} from '../api/AppsAPI.js'
     window.React = React;
 
     var routes = (
-        <Route handler={AppsListPage} path="/">
+        <Route path="/">
             <DefaultRoute handler={AppsListPage} />
+            <Route name="comments" path="/comments/:appId" handler={AppComments} />
         </Route>
     );
 
@@ -29,8 +29,6 @@ import {AppsAPI} from '../api/AppsAPI.js'
         var params = state.params;
         React.render(<Handler params={params} />, document.getElementById('content'));
     });
-
-    AppsAPI.getApps("Android");
 
 })();
 
