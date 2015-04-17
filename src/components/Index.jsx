@@ -26,8 +26,9 @@ import Nav from './App/Nav.jsx';
     );
 
     Router.run(routes, HashLocation, function (Handler, state) {
-        var params = state.params;
-        React.render(<Handler params={params} />, document.getElementById('content'));
+        let params = state.params;
+        let query = state.query;
+        React.render(<Handler params={params} query={query} />, document.getElementById('content'));
     });
 
 })();

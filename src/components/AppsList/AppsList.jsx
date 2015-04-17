@@ -7,6 +7,7 @@ import SearchForm from './SearchForm.jsx'
 import AppActions from '../App/AppActions.jsx'
 
 import {DateUtils} from '../../utils/DateUtils.js'
+var Link = require('react-router').Link
 
 export default class AppsList extends React.Component {
     constructor() {
@@ -90,11 +91,12 @@ export default class AppsList extends React.Component {
                                 <tr>
                                     <td><img src={app.icon} style={iconStyle}/></td>
                                     <td>
-                                        <h4> <a href={commentsPath}>{app.name}</a></h4>
+                                        <h4><Link to="comments" params={{appId: app._id}} query={{appName: app.name, appIcon: app.icon}}>{app.name}</Link>
+                                            </h4>
                                         <img src="./img/ic_comment.png" width="16px"/>
                                         <span>{app.commentsCount}</span>
                                     </td>
-                                    <td>{app.description}</td>
+                                    <td>{app.comment}</td>
                                     <td><a href={app.url} target="_blank">URL</a></td>
                                     <td><a href={app.shortUrl} target="_blank">Short URL</a></td>
                                     <td>

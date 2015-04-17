@@ -4,7 +4,7 @@ var AppsConstants = require('../constants/AppsConstants');
 export var AppsActions = {
     loadApps: function(data) {
         Dispatcher.handleServerAction({
-            actionType: AppsConstants.RECEIVE_DATA,
+            actionType: AppsConstants.LOAD_APPS,
             data: data
         })
     }

@@ -1,8 +1,8 @@
 {
-  "name": "application-name",
+  "name": "AppHunt Admin",
   "version": "0.0.1",
   "private": true,
-  "description": "Example app",
+  "description": "AppHunt admin",
   "main": "gulpfile.js",
   "engines": {
     "node": "0.12.x"

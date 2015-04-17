@@ -24,7 +24,7 @@ export var EditAppModal = React.createClass({
     },
 
     _updateApp() {
-        let appDescription = React.findDOMNode(this.refs.description).value;
+        let appDescription = React.findDOMNode(this.refs.comment).value;
         AppAPI.updateApp(this.appPackage, this.createdAt, appDescription, this.status)
     },
     componentDidMount() {
@@ -44,7 +44,7 @@ export var EditAppModal = React.createClass({
     handleDescriptionChange: function(event) {
         let description = event.target.value;
         if(description.length <= 100) {
-            this.setState({description: event.target.value});
+            this.setState({comment: event.target.value});
         }
     },
 
@@ -59,9 +59,9 @@ export var EditAppModal = React.createClass({
         this.appPackage = this.app.package;
         this.status = this.app.status;
         let title = 'Edit ' + this.app.name;
-        let description = this.app.description;
-        if(this.state.description !== undefined) {
-            description = this.state.description;
+        let description = this.app.comment;
+        if(this.state.comment !== undefined) {
+            description = this.state.comment;
         }
         return (
             <Modal bsStyle='primary' title={title} onRequestHide={this.handleToggle}>
