@@ -62,8 +62,8 @@ function getFormattedApps(apps) {
         var app = apps[i]
         app.icon = app.icon === undefined ? "" : app.icon
         app.creatorType = app.createdBy.loginType != 'fake' ? 'real' : 'fake'
+        app.createdByMail = app.createdBy.email.includes('@example.com') === false ? app.createdBy.email : ""
         app.createdBy = app.createdBy.name !== undefined ? app.createdBy.name : ""
-        app.createdByMail = app.createdBy.email !== undefined ? app.createdBy.email : ""
         newApps.push(app)
     }
 

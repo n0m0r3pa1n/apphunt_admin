@@ -60,6 +60,8 @@ export default class AppsList extends React.Component {
         var iconStyle = {
             width: 96
         }
+
+
         return (
             <div className="row panel">
                 <table className="table table-bordered table-hover panel-body" id="apps_table">
@@ -80,8 +82,9 @@ export default class AppsList extends React.Component {
                     <tbody>
                     {
                         Object.keys(apps).map( (field, i) => {
-                            var app = data.apps[i]
-                            var userType = app.createdBy.loginType != 'fake' ? 'real' : 'fake'
+                            let app = data.apps[i]
+                            let userType = app.createdBy.loginType != 'fake' ? 'real' : 'fake'
+                            let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}>{app.createdBy}</a> : <div>{app.createdBy}</div>
                             return(
                                 <tr>
                                     <td><img src={app.icon} style={iconStyle}/></td>
@@ -96,7 +99,7 @@ export default class AppsList extends React.Component {
                                     <td>
                                         {DateUtils.formatDate(new Date(app.createdAt))}
                                     </td>
-                                    <td><a href={'mailto:' + app.createdByMail}>{app.createdBy}</a> ({app.creatorType})</td>
+                                    <td>{mailTo} ({app.creatorType})</td>
                                     <td>{app.status}</td>
                                     <td>
                                         <label>{app.votesCount}</label>
