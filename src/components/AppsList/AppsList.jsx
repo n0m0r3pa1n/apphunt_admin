@@ -96,7 +96,7 @@ export default class AppsList extends React.Component {
                                         <img src="./img/ic_comment.png" width="16px"/>
                                         <span>{app.commentsCount}</span>
                                     </td>
-                                    <td>{app.comment}</td>
+                                    <td>{app.description}</td>
                                     <td><a href={app.url} target="_blank">URL</a></td>
                                     <td><a href={app.shortUrl} target="_blank">Short URL</a></td>
                                     <td>
