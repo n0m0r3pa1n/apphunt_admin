@@ -41,6 +41,6 @@
     "watchify": "^2.3.0"
   },
   "scripts": {
-    "start": "gulp"
+    "start": "node src/server.js"
   }
 }
