@@ -96,15 +96,15 @@ export default class AppsList extends React.Component {
                                         <img src="./img/ic_comment.png" width="16px"/>
                                         <span>{app.commentsCount}</span>
                                     </td>
-                                    <td>{app.description}</td>
+                                    <td className="col-md-4">{app.description}</td>
                                     <td><a href={app.url} target="_blank">URL</a></td>
                                     <td><a href={app.shortUrl} target="_blank">Short URL</a></td>
-                                    <td>
+                                    <td className="col-md-1">
                                         {DateUtils.formatDate(new Date(app.createdAt))}
                                     </td>
                                     <td>{mailTo} ({app.creatorType})</td>
                                     <td>{app.status}</td>
-                                    <td>
+                                    <td >
                                         <label>{app.votesCount}</label>
                                         <div>
                                             <button  className="btn btn-success" onClick={this.vote.bind(this, app._id)} >
@@ -115,7 +115,7 @@ export default class AppsList extends React.Component {
                                             </button>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td className="col-md-2">
                                         <AppActions app={app} />
                                     </td>
                                 </tr>

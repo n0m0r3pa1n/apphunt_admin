@@ -32,11 +32,11 @@ export default class AppActions extends React.Component {
 
     render() {
         this.app = this.props.app;
-        var approveBtn = this.app.status === 'waiting' ? <button className="btn-default btn-primary" onClick={this._approve}>Approve</button> : ''
+        var approveBtn = this.app.status === 'waiting' ? <button className="btn-default btn-primary" style={{marginRight: 10}} onClick={this._approve}>Approve</button> : ''
         return (
-            <div className="text-center">
+            <div className="col-md-12">
                 {approveBtn}
-                <button className="btn btn-danger" onClick={this._reject}>Reject</button>
+                <button className="btn btn-danger" style={{marginRight: 10}} onClick={this._reject}>Reject</button>
                 <EditApp app={this.props.app}/>
             </div>);
     }
