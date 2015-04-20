@@ -44,5 +44,19 @@ export var CommentsAPI = {
                 console.log("error: " + errorThrown)
             }
         });
+    },
+    deleteComments(commentId) {
+        let url = BASE_URL + "comments?commentId=" + commentId
+        console.log(url)
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            success: function (data) {
+                CommentsAPI.reloadComments();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error: " + errorThrown)
+            }
+        });
     }
 };

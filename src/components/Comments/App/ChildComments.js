@@ -6,6 +6,8 @@ var Button = ReactBootstrap.Button
 
 import {VotesAPI} from '../../../api/VotesAPI.js'
 
+import DeleteComment from './DeleteComment.js'
+
 export default class ChildComments extends React.Component {
     constructor(props) {
         super(props);
@@ -44,6 +46,9 @@ export default class ChildComments extends React.Component {
                                     <Button  bsStyle="danger" onClick={this._unvoteForComment.bind(this, comment._id)}>
                                         <span className="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                                     </Button>
+                                </td>
+                                <td>
+                                    <DeleteComment commentId={comment._id} />
                                 </td>
                             </tr>
                             );

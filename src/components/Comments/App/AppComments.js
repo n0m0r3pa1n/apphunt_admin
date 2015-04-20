@@ -10,6 +10,7 @@ import {VotesAPI} from '../../../api/VotesAPI.js'
 
 import {CommentReply} from './CommentReply/CommentReply.jsx'
 import ChildComments from './ChildComments.js'
+import DeleteComment from './DeleteComment.js'
 
 export default class AppComments extends React.Component {
     constructor(props) {
@@ -73,6 +74,7 @@ export default class AppComments extends React.Component {
                         <th>Comment</th>
                         <th>Actions</th>
                         <th>Replies</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody data-bind="foreach: comments()">
@@ -96,6 +98,9 @@ export default class AppComments extends React.Component {
                                     </td>
                                     <td>
                                         <ChildComments comments={comment.children} />
+                                    </td>
+                                    <td>
+                                        <DeleteComment commentId={comment._id} />
                                     </td>
                                 </tr>
                             )
