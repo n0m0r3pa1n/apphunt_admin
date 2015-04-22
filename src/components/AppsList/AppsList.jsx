@@ -57,7 +57,6 @@ export default class AppsList extends React.Component {
         if(data !== null) {
             apps = data.apps
         }
-
         var iconStyle = {
             width: 96
         }
@@ -85,8 +84,10 @@ export default class AppsList extends React.Component {
                         Object.keys(apps).map( (field, i) => {
                             let app = data.apps[i]
                             let commentsPath = '#/comments/' + app._id
-                            let userType = app.createdBy.loginType != 'fake' ? 'real' : 'fake'
-                            let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}>{app.createdBy}</a> : <div>{app.createdBy}</div>
+                            let userType = app.creatorType != 'fake' ? '(real)' : ''
+                            let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}>{app.createdByMail}</a> : ""
+                            let twitterHref = "https://twitter.com/" + app.createdBy
+                            let twitterLink = app.creatorType != 'fake' ? <a href={twitterHref} target="_blank">{app.createdBy}</a> : <div>{app.createdBy}</div>
                             return(
                                 <tr>
                                     <td><img src={app.icon} style={iconStyle}/></td>
@@ -102,7 +103,7 @@ export default class AppsList extends React.Component {
                                     <td className="col-md-1">
                                         {DateUtils.formatDate(new Date(app.createdAt))}
                                     </td>
-                                    <td>{mailTo} ({app.creatorType})</td>
+                                    <td>{twitterLink} {mailTo} {userType}</td>
                                     <td>{app.status}</td>
                                     <td >
                                         <label>{app.votesCount}</label>
