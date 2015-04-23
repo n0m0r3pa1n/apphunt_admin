@@ -85,9 +85,11 @@ export default class AppsList extends React.Component {
                             let app = data.apps[i]
                             let commentsPath = '#/comments/' + app._id
                             let userType = app.creatorType != 'fake' ? '(real)' : ''
-                            let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}>{app.createdByMail}</a> : ""
+                            let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}><span className="glyphicon glyphicon-envelope"></span></a> : ""
                             let twitterHref = "https://twitter.com/" + app.createdBy
-                            let twitterLink = app.creatorType != 'fake' ? <a href={twitterHref} target="_blank">{app.createdBy}</a> : <div>{app.createdBy}</div>
+                            let twitterLink = app.creatorType != 'fake' ?
+                                <a href={twitterHref} target="_blank"><span className="glyphicon glyphicon-comment"></span></a> :
+                                <div></div>
                             return(
                                 <tr>
                                     <td><img src={app.icon} style={iconStyle}/></td>
@@ -103,7 +105,12 @@ export default class AppsList extends React.Component {
                                     <td className="col-md-1">
                                         {DateUtils.formatDate(new Date(app.createdAt))}
                                     </td>
-                                    <td>{twitterLink} {mailTo} {userType}</td>
+                                    <td>
+                                        {app.createdBy}
+                                        <br />
+                                        {userType}
+                                        <br />
+                                        {twitterLink} {mailTo} </td>
                                     <td>{app.status}</td>
                                     <td >
                                         <label>{app.votesCount}</label>
