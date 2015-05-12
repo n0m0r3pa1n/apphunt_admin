@@ -6,7 +6,7 @@ var OverlayMixin = ReactBootstrap.OverlayMixin
 var Button = ReactBootstrap.Button
 var Modal = ReactBootstrap.Modal
 
-import {AppsStore} from '../../../stores/AppsStore.js'
+import {AppCollectionsStore} from '../../../stores/AppCollectionsStore.js'
 import {AppCollectionsAPI} from '../../../api/AppCollectionsAPI.js'
 
 export var AddAppCollectionModal = React.createClass({
@@ -23,7 +23,7 @@ export var AddAppCollectionModal = React.createClass({
         });
     },
 
-    _submitApp() {
+    _submitCollection() {
         let userId = "54be5d68e4b0d3cacca686c5";
         let name =  React.findDOMNode(this.refs.name).value;
         let description = React.findDOMNode(this.refs.description).value;
@@ -32,11 +32,11 @@ export var AddAppCollectionModal = React.createClass({
         AppCollectionsAPI.createCollection(name, description, picture, userId);
     },
     componentDidMount() {
-        AppsStore.addChangeListener(this._onChange);
+        AppCollectionsStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount() {
-        AppsStore.removeChangeListener(this._onChange);
+        AppCollectionsStore.removeChangeListener(this._onChange);
     },
 
     _onChange(data) {
@@ -74,7 +74,7 @@ export var AddAppCollectionModal = React.createClass({
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-primary save_app" data-dismiss="modal" onClick={this._submitApp}>Save</button>
+                            <button type="button" className="btn btn-primary save_app" data-dismiss="modal" onClick={this._submitCollection}>Save</button>
                             <Button onClick={this.handleToggle}>Close</Button>
                         </div>
                     </div>
