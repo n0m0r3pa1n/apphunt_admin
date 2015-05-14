@@ -3,6 +3,7 @@
 import React from 'react';
 var ReactBootstrap = require('react-bootstrap')
 var Button = ReactBootstrap.Button
+var Link = require('react-router').Link
 import {DateUtils} from '../../utils/DateUtils.js'
 import {AddAppCollection} from './Add/AddAppCollection.jsx'
 import {AppCollectionsAPI} from '../../api/AppCollectionsAPI.js'
@@ -72,7 +73,7 @@ export default class AppCollections extends React.Component {
                                     <tr>
                                         <td><img src={collection.picture}/></td>
                                         <td>
-                                            <h4>{collection.name}</h4>
+                                            <h4><Link to="app-collection" params={{collectionId: collection._id}}>{collection.name}</Link></h4>
                                         </td>
                                         <td className="col-md-4">{collection.description}</td>
                                         <td className="col-md-1">

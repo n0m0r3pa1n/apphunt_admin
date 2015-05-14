@@ -7,5 +7,11 @@ export var AppCollectionsActions = {
             actionType: AppCollectionsConstants.LOAD_APP_COLLECTIONS,
             data: data
         })
+    },
+    loadAppCollection: function(data) {
+        Dispatcher.handleServerAction({
+            actionType: AppCollectionsConstants.LOAD_APP_COLLECTION,
+            data: data
+        })
     }
 };

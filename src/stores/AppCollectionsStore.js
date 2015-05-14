@@ -5,12 +5,15 @@ import * as AppCollectionsConstants from '../constants/AppCollectionsConstants.j
 var _ = require('lodash');
 
 var data = {}
-function loadAppCollections(newData) {
+function refreshData(newData) {
     data = newData;
 }
 
 export var AppCollectionsStore = _.extend({}, EventEmitter.prototype, {
     getAppCollections: function() {
+        return data;
+    },
+    getAppCollection: function() {
         return data;
     },
     emitChange: function() {
@@ -29,7 +32,8 @@ Dispatcher.register(function(payload) {
     var text;
     switch(action.action) {
         case AppCollectionsConstants.LOAD_APP_COLLECTIONS:
-            loadAppCollections(action.data);
+        case AppCollectionsConstants.LOAD_APP_COLLECTION:
+            refreshData(action.data);
             break;
 
         default:

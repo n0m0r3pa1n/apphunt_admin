@@ -36,6 +36,13 @@ export var AppCollectionsAPI = {
             });
         });
     },
+    getCollection: function (collectionId) {
+        this.url = APP_COLLECTIONS_URL + "/" + collectionId
+        console.log(this.url);
+        $.get(this.url, function (data, status) {
+            AppCollectionsActions.loadAppCollection({collection: data})
+        });
+    },
     reloadCollections: function() {
         $.get(this.url, function(data, status) {
             AppCollectionsActions.loadAppCollections({
