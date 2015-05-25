@@ -15,21 +15,21 @@ export default class AppCollections extends React.Component {
         super();
         this.setAppsCollections = this.setAppsCollections.bind(this);
         this.getAppsCollections = this.getAppsCollections.bind(this);
-        this._onChange = this._onChange.bind(this);
+        this._onLoadAppCollections = this._onLoadAppCollections.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.componentWillUnmount = this.componentWillUnmount.bind(this);
         AppCollectionsAPI.getCollections(1, 100)
     }
 
     componentDidMount() {
-        AppCollectionsStore.addChangeListener(this._onChange);
+        AppCollectionsStore.addLoadAppCollectionsListener(this._onLoadAppCollections);
     }
 
     componentWillUnmount() {
-        AppCollectionsStore.removeChangeListener(this._onChange);
+        AppCollectionsStore.removeLoadAppCollectionsListener(this._onLoadAppCollections);
     }
 
-    _onChange(data) {
+    _onLoadAppCollections(data) {
         this.setAppsCollections(AppCollectionsStore.getAppCollections())
     }
 
@@ -73,7 +73,7 @@ export default class AppCollections extends React.Component {
                                     <tr>
                                         <td><img src={collection.picture}/></td>
                                         <td>
-                                            <h4><Link to="app-collection" params={{collectionId: collection._id}}>{collection.name}</Link></h4>
+                                            <h4><Link to="app-collection" params={{collectionId: collection._id}} test={"123"}>{collection.name}</Link></h4>
                                         </td>
                                         <td className="col-md-4">{collection.description}</td>
                                         <td className="col-md-1">

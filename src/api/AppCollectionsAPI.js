@@ -18,7 +18,6 @@ export var AppCollectionsAPI = {
                 userId: userId
             },
             success: function (data) {
-                console.log(data)
                 AppCollectionsAPI.reloadCollections()
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -28,7 +27,6 @@ export var AppCollectionsAPI = {
     },
     getCollections: function (page, pageSize) {
         this.url = APP_COLLECTIONS_URL + "?pageSize=" + pageSize + "&page=" + page;
-        console.log(this.url);
         $.get(this.url, function (data, status) {
             AppCollectionsActions.loadAppCollections({
                 collections: formatCollections(data.collections),
@@ -38,9 +36,23 @@ export var AppCollectionsAPI = {
     },
     getCollection: function (collectionId) {
         this.url = APP_COLLECTIONS_URL + "/" + collectionId
-        console.log(this.url);
         $.get(this.url, function (data, status) {
             AppCollectionsActions.loadAppCollection({collection: data})
+        });
+    },
+    addAppsInCollection(collectionId, apps) {
+        $.ajax({
+            url: APP_COLLECTIONS_URL + "/" + collectionId,
+            type: 'PUT',
+            data: {
+                apps: apps
+            },
+            success: function (data) {
+                AppsAPI.reloadApps();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error: " + errorThrown)
+            }
         });
     },
     reloadCollections: function() {

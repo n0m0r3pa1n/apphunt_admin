@@ -49,6 +49,29 @@ export var AppsAPI = {
             AppsActions.receiveApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: lastAppsPlatform});
         });
     },
+    searchApps: function(query, fromDate, toDate, platform, page, pageSize, status) {
+        console.log(query)
+        var url = baseURL + "apps?platform=" + platform
+        if(query) {
+            url += "&query=" + query
+        }
+        url += "&page=" + page + "&pageSize=" + pageSize
+        url += "&status=" + status
+
+        if(fromDate != null) {
+            var fromStr = DateUtils.formatDate(fromDate)
+            url += "&date=" + fromStr
+        }
+
+        if(toDate != null) {
+            var toStr = DateUtils.formatDate(toDate)
+            url += "&toDate=" + toStr
+        }
+        console.log(url)
+        $.get(url, function(data, status) {
+            AppsActions.loadApps({apps: getFormattedApps(data.apps), totalCount: data.totalCount, platform: platform});
+        });
+    },
     reloadApps: function() {
         $.get(this.url, function(data, status) {
             AppsActions.loadApps({apps: getFormattedApps(data.apps), date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: lastAppsPlatform});

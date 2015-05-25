@@ -4,7 +4,7 @@ import React from 'react';
 import AppsListPage from './AppsList/AppsListPage.jsx';
 import AppComments from './Comments/App/AppComments.js';
 import AppCollections from './AppCollections/AppCollections.jsx'
-import CollectionApps from './AppCollections/Collection/CollectionApps.jsx'
+import CollectionDetails from './AppCollections/Collection/CollectionDetails.jsx'
 import Nav from './App/Nav.jsx';
 
 (function () {
@@ -20,7 +20,7 @@ import Nav from './App/Nav.jsx';
             <DefaultRoute handler={AppsListPage} />
             <Route name="comments" path="/comments/:appId" handler={AppComments} />
             <Route name="app-collections" path="/app-collections" handler={AppCollections} />
-            <Route name="app-collection" path="/app-collections/:collectionId" handler={CollectionApps} />
+            <Route name="app-collection" path="/app-collections/:collectionId" handler={CollectionDetails} />
         </Route>
     );
 
