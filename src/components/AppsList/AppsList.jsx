@@ -81,7 +81,7 @@ export default class AppsList extends React.Component {
                     </thead>
                     <tbody>
                     {
-                        Object.keys(apps).map( (field, i) => {
+                        Object.keys(apps).map((field, i) => {
                             let app = data.apps[i]
                             let commentsPath = '#/comments/' + app._id
                             let userType = app.creatorType != 'fake' ? '(real)' : ''

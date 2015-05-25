@@ -15,7 +15,6 @@ export default class SearchResultsList extends React.Component {
         super(props);
         //this.collectionId = props.collectionId
         this.collectionId = ""
-        console.log("ASASASASA" + this.collectionId)
         this.setApps = this.setApps.bind(this);
         this.getApps = this.getApps.bind(this);
         this._onChange = this._onChange.bind(this);
@@ -48,16 +47,15 @@ export default class SearchResultsList extends React.Component {
 
     render() {
         var data = this.state !== null ? this.state.data : null;
-        var apps = [];
+        var apps = new Array();
 
-        if(data !== null) {
+        if(data !== null && data.apps !== undefined && data !== undefined) {
             apps = data.apps
         }
 
         var iconStyle = {
             width: 96
         }
-        console.log("Apps:", Object.keys(apps))
         return (
             <div className="row panel">
                 <table className="table table-bordered table-hover panel-body" id="apps_table">
@@ -75,7 +73,7 @@ export default class SearchResultsList extends React.Component {
                     </thead>
                     <tbody>
                     {
-                        Object.keys(apps).map( (field, i) => {
+                        Object.keys(apps).map((field, i) => {
                             let app = data.apps[i]
                             let userType = app.creatorType != 'fake' ? '(real)' : ''
                             let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}><span className="glyphicon glyphicon-envelope"></span></a> : ""
@@ -105,14 +103,12 @@ export default class SearchResultsList extends React.Component {
                                     </td>
                                     <td >
                                         <label>{app.votesCount}</label>
-                                        <div>
                                             <button  className="btn btn-success" onClick={this.vote.bind(this, app._id)} >
                                                 <span className="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
                                             </button>
                                             <button  className="btn btn-danger" onClick={this.unvote.bind(this, app._id)}>
                                                 <span className="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                                             </button>
-                                        </div>
                                     </td>
                                     <td className="col-md-2">
                                         <Button onClick={this.addToCollection.bind(this, app._id)} bsStyle='primary'><span className="glyphicon glyphicon-plus" aria-hidden="true"></span></Button>

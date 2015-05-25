@@ -33,16 +33,21 @@ export default class AddedAppsList extends React.Component {
 
     render() {
         var data = this.state !== null ? this.state.data : null;
-        var apps = [];
+        var apps = new Array();
 
-        if(data !== null) {
+        if(data !== null && data !== undefined) {
             apps = data.apps
+        }
+
+        if(apps == null || apps==undefined) {
+            apps = []
         }
 
         var iconStyle = {
             width: 96
         }
 
+        console.log("APPS", apps)
         return (
             <div className="row panel">
                 <table className="table table-bordered table-hover panel-body" id="apps_table">
