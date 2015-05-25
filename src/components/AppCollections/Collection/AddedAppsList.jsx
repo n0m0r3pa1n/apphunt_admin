@@ -3,34 +3,42 @@
 import React from 'react';
 var ReactBootstrap =  require('react-bootstrap')
 var Button = ReactBootstrap.Button
-
+import {AppCollectionsStore} from '../../../stores/AppCollectionsStore.js'
 import {DateUtils} from '../../../utils/DateUtils.js'
 
 export default class AddedAppsList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.apps = props.apps
-        this.apps = []
-        //this._onLoadAppCollection = this._onLoadAppCollection.bind(this);
-        //this.componentWillMount = this.componentWillMount.bind(this);
-        //this.componentWillUnmount = this.componentWillUnmount.bind(this);
+    constructor() {
+        super();
+        //this.apps = props.apps
+        //this.apps = []
+        this._onLoadCollection = this._onLoadCollection.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
+        this.componentWillUnmount = this.componentWillUnmount.bind(this);
     }
 
-    //componentWillMount() {
-    //    console.log("AddedAppsList componentWillMount");
-    //    AppCollectionsStore.addLoadAppCollectionListener(this._onLoadAppCollection);
-    //}
-    //
-    //componentWillUnmount() {
-    //    AppCollectionsStore.removeLoadAppCollectionListener(this._onLoadAppCollection);
-    //}
-    //
-    //_onLoadAppCollection(data) {
-    //    console.log("CHNANGE AddedAppsList")
-    //    this.props = AppCollectionsStore.getAppCollection().apps
-    //}
+    componentWillMount() {
+        console.log("AddedAppsList componentWillMount");
+        AppCollectionsStore.addLoadAppCollectionListener(this._onLoadCollection);
+    }
+
+    componentWillUnmount() {
+        AppCollectionsStore.removeLoadAppCollectionListener(this._onLoadCollection);
+    }
+
+    _onLoadCollection(data) {
+        console.log("CHNANGE AddedAppsList")
+        this.data = data;
+        this.setState({data: AppCollectionsStore.getAppCollection()})
+    }
 
     render() {
+        var data = this.state !== null ? this.state.data : null;
+        var apps = [];
+
+        if(data !== null) {
+            apps = data.apps
+        }
+
         var iconStyle = {
             width: 96
         }
@@ -52,7 +60,7 @@ export default class AddedAppsList extends React.Component {
                     <tbody>
                     {
 
-                        Object.keys(this.apps).map( (field, i) => {
+                        Object.keys(apps).map( (field, i) => {
                             let app = apps[i]
                             let userType = app.creatorType != 'fake' ? '(real)' : ''
                             let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}><span className="glyphicon glyphicon-envelope"></span></a> : ""

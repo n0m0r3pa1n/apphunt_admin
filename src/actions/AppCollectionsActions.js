@@ -9,7 +9,6 @@ export var AppCollectionsActions = {
         })
     },
     loadAppCollection: function(data) {
-        console.log("Actions: LoadAppCollection")
         Dispatcher.handleServerAction({
             actionType: AppCollectionsConstants.LOAD_APP_COLLECTION,
             data: data

@@ -46,7 +46,7 @@ export var AppCollectionsStore = _.extend({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(payload) {
     var action = payload.action;
-    console.log("Store: " + action)
+    console.log("Store: ")
     var text;
     switch(action.actionType) {
         case AppCollectionsConstants.LOAD_APP_COLLECTIONS:
