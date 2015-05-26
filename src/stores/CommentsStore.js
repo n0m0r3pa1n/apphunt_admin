@@ -1,7 +1,7 @@
 'use strict';
 import {Dispatcher} from '../core/Dispatcher.js'
 import {EventEmitter} from 'eventemitter3'
-import * as CommentsConstants from '../constants/CommentsConstants.js'
+var CommentsConstants = require('../constants/CommentsConstants.js')
 var _ = require('lodash');
 
 var data = {}

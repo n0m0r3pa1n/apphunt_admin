@@ -10,7 +10,6 @@ function refreshCollections(newData) {
     collectionsData = newData;
 }
 function refreshCollection(newData) {
-    console.log(newData)
     collectionData = newData;
 }
 export var AppCollectionsStore = _.extend({}, EventEmitter.prototype, {
