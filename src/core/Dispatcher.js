@@ -12,7 +12,6 @@ export var Dispatcher = assign(new Flux.Dispatcher(), {
      * type and additional data coming from the server.
      */
     handleServerAction(action) {
-        console.log("Dispatcher", action)
         var payload = {
             source: PayloadSources.SERVER_ACTION,
             action: action

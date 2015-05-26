@@ -10,37 +10,12 @@ import AppsList from '../../AppsList/AppsList.jsx'
 
 import {AppCollectionsAPI} from '../../../api/AppCollectionsAPI.js'
 
-export default class SearchResultsList extends React.Component {
+export default class SearchResultsList extends AppsList {
     constructor(props) {
         super(props);
-        //this.collectionId = props.collectionId
-        this.collectionId = ""
-        this.setApps = this.setApps.bind(this);
-        this.getApps = this.getApps.bind(this);
-        this._onChange = this._onChange.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.componentWillUnmount = this.componentWillUnmount.bind(this);
+        this.collectionId = props.collectionId
     }
 
-    componentDidMount() {
-        AppsStore.addChangeListener(this._onChange);
-    }
-
-    componentWillUnmount() {
-        AppsStore.removeChangeListener(this._onChange);
-    }
-
-    _onChange(data) {
-        this.setApps(AppsStore.getApps())
-    }
-
-    setApps(data) {
-        this.data = data;
-        this.setState({data: data})
-    }
-    getApps() {
-        return this.data
-    }
     addToCollection(appId) {
         AppCollectionsAPI.addAppsInCollection(this.collectionId, [appId])
     }

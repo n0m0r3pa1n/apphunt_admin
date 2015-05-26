@@ -4,6 +4,7 @@ var $ = require("jquery")
 
 import {APP_COLLECTIONS_URL} from '../config/config.js'
 import {AppCollectionsActions} from '../actions/AppCollectionsActions.js'
+import {AppsAPI} from './AppsAPI.js'
 
 
 export var AppCollectionsAPI = {
@@ -48,7 +49,7 @@ export var AppCollectionsAPI = {
                 apps: apps
             },
             success: function (data) {
-                AppsAPI.reloadApps();
+                AppCollectionsAPI.getCollection(collectionId)
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log("error: " + errorThrown)

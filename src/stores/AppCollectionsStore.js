@@ -21,12 +21,9 @@ export var AppCollectionsStore = _.extend({}, EventEmitter.prototype, {
         return collectionData;
     },
     emitLoadAppCollection: function() {
-        console.log(this.listeners("loadAppCollection", true))
-        console.log("emitLoadAppCollection")
         this.emit('loadAppCollection');
     },
     emitLoadAppCollections: function() {
-        console.log(this.listeners("loadAppCollections", true))
         this.emit('loadAppCollections');
     },
     addLoadAppCollectionsListener: function(callback) {
@@ -36,7 +33,6 @@ export var AppCollectionsStore = _.extend({}, EventEmitter.prototype, {
         this.removeListener('loadAppCollections', callback);
     },
     addLoadAppCollectionListener: function(callback) {
-        console.log("addLoadAppCollectionListener");
         this.on('loadAppCollection', callback);
     },
     removeLoadAppCollectionListener: function(callback) {
@@ -46,7 +42,6 @@ export var AppCollectionsStore = _.extend({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(payload) {
     var action = payload.action;
-    console.log("Store: ")
     var text;
     switch(action.actionType) {
         case AppCollectionsConstants.LOAD_APP_COLLECTIONS:
@@ -54,7 +49,6 @@ Dispatcher.register(function(payload) {
             AppCollectionsStore.emitLoadAppCollections()
             break;
         case AppCollectionsConstants.LOAD_APP_COLLECTION:
-            console.log("AppCollectionsStore case LOAD_APP_COLLECTION")
             refreshCollection(action.data);
             AppCollectionsStore.emitLoadAppCollection()
             break;

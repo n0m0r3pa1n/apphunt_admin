@@ -1,7 +1,7 @@
 'use strict';
 import {Dispatcher} from '../core/Dispatcher.js'
 import {EventEmitter} from 'eventemitter3'
-import * as AppConstants from '../constants/AppsConstants.js'
+var AppsConstants = require('../constants/AppsConstants.js')
 var _ = require('lodash');
 
 var data = {}
@@ -27,8 +27,9 @@ export var AppsStore = _.extend({}, EventEmitter.prototype, {
 Dispatcher.register(function(payload) {
     var action = payload.action;
     var text;
-    switch(action.action) {
-        case AppConstants.LOAD_APPS:
+    switch(action.actionType) {
+        case AppsConstants.LOAD_APPS:
+            console.log("AppsStore", action)
             loadApps(action.data);
             break;
 

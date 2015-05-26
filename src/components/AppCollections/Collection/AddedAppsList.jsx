@@ -9,15 +9,12 @@ import {DateUtils} from '../../../utils/DateUtils.js'
 export default class AddedAppsList extends React.Component {
     constructor() {
         super();
-        //this.apps = props.apps
-        //this.apps = []
         this._onLoadCollection = this._onLoadCollection.bind(this);
         this.componentWillMount = this.componentWillMount.bind(this);
         this.componentWillUnmount = this.componentWillUnmount.bind(this);
     }
 
     componentWillMount() {
-        console.log("AddedAppsList componentWillMount");
         AppCollectionsStore.addLoadAppCollectionListener(this._onLoadCollection);
     }
 
@@ -26,7 +23,6 @@ export default class AddedAppsList extends React.Component {
     }
 
     _onLoadCollection(data) {
-        console.log("CHNANGE AddedAppsList")
         this.data = data;
         this.setState({data: AppCollectionsStore.getAppCollection()})
     }
@@ -36,7 +32,7 @@ export default class AddedAppsList extends React.Component {
         var apps = new Array();
 
         if(data !== null && data !== undefined) {
-            apps = data.apps
+            apps = data.collection.apps
         }
 
         if(apps == null || apps==undefined) {
@@ -47,7 +43,6 @@ export default class AddedAppsList extends React.Component {
             width: 96
         }
 
-        console.log("APPS", apps)
         return (
             <div className="row panel">
                 <table className="table table-bordered table-hover panel-body" id="apps_table">

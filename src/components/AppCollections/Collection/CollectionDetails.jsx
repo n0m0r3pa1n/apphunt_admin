@@ -22,12 +22,10 @@ export default class CollectionDetails extends React.Component {
         this._onLoadAppCollection = this._onLoadAppCollection.bind(this);
         this.componentWillMount = this.componentWillMount.bind(this);
         this.componentWillUnmount = this.componentWillUnmount.bind(this);
-        console.log("CollectionDetails constructor");
         AppCollectionsAPI.getCollection(this.collectionId);
     }
 
     componentWillMount() {
-        console.log("componentWillMount");
         AppCollectionsStore.addLoadAppCollectionListener(this._onLoadAppCollection);
     }
 
@@ -36,7 +34,6 @@ export default class CollectionDetails extends React.Component {
     }
 
     _onLoadAppCollection(data) {
-        console.log("CHNANGE")
         this.setAppsCollection(AppCollectionsStore.getAppCollection())
     }
 
@@ -46,18 +43,10 @@ export default class CollectionDetails extends React.Component {
     }
 
     render() {
-        console.log("RENDER")
         var collection = {};
-        var collectionId = "";
-        var apps = []
         var data = this.state !== null ? this.state.data : null;
         if (data !== null) {
-            console.log("COLLECTION")
             collection = data.collection
-            collectionId = collection._id
-            apps = collection.apps
-            console.log("Collection: " )
-            console.log(collection.apps)
         }
 
         return (
@@ -69,12 +58,12 @@ export default class CollectionDetails extends React.Component {
                     </div>
                     <div className="col-lg-12">
                         <h3>Apps</h3>
-                        <AddedAppsList apps={collection.apps}/>
+                        <AddedAppsList/>
                     </div>
                 </div>
                 <div className="col-lg-6" style={{borderLeft: "1px solid black"}}>
                     <SearchForm />
-                    <SearchResultsList />
+                    <SearchResultsList collectionId={this.collectionId}/>
                 </div>
 
             </div>
