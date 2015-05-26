@@ -11,7 +11,6 @@ import {AppCollectionsAPI} from '../../../api/AppCollectionsAPI.js'
 import {AppCollectionsStore} from '../../../stores/AppCollectionsStore.js'
 
 var Select = require('react-select');
-var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
 
 export default class CollectionDetails extends React.Component {
 

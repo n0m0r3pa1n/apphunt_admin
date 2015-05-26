@@ -9,7 +9,6 @@ import {DateUtils} from '../../../utils/DateUtils.js'
 
 var $ = require('jquery')
 var Select = require('react-select');
-var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
 var DatePicker = require('react-datepicker')
 
 var moment = require('moment')

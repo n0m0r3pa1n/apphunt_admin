@@ -29,7 +29,6 @@ Dispatcher.register(function(payload) {
     var text;
     switch(action.actionType) {
         case AppsConstants.LOAD_APPS:
-            console.log("AppsStore", action)
             loadApps(action.data);
             break;
 

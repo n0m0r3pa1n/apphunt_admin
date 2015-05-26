@@ -5,27 +5,35 @@ var ReactBootstrap =  require('react-bootstrap')
 
 var Button = ReactBootstrap.Button
 var Modal = ReactBootstrap.Modal
-var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
+var DatePicker = require('react-datepicker')
+var moment = require('moment')
 
 import {AppsStore} from '../../../stores/AppsStore.js'
 import {AppAPI} from '../../../api/AppAPI.js'
 
 export var EditAppModal = React.createClass({
+
     getInitialState() {
+        console.log(moment(this.props.app.createdAt))
         return {
-            isModalOpen: true
+            isModalOpen: true,
+            selectedDate: moment(this.props.app.createdAt)
         };
     },
     handleToggle() {
         this.props.onModalToggle(!this.state.isModalOpen)
+        console.log("toggle");
         this.setState({
             isModalOpen: !this.state.isModalOpen
+
         });
     },
 
     _updateApp() {
         let appDescription = React.findDOMNode(this.refs.description).value;
-        AppAPI.updateApp(this.appPackage, this.createdAt, appDescription, this.status)
+        let createdAt = this.state.selectedDate.toDate()
+        console.log(createdAt)
+        AppAPI.updateApp(this.appPackage, createdAt, appDescription, this.status)
     },
     componentDidMount() {
         AppsStore.addChangeListener(this._onChange);
@@ -39,7 +47,9 @@ export var EditAppModal = React.createClass({
         this.handleToggle()
     },
     _onCreatedAtChange(date) {
-        this.createdAt = date
+        this.setState({
+            selectedDate: date
+        })
     },
     handleDescriptionChange: function(event) {
         let description = event.target.value;
@@ -70,7 +80,7 @@ export var EditAppModal = React.createClass({
                     <div className="modal-body">
                         <div className="form-group">
                             <label>Created At</label>
-                            <DatePickerInput ref="createdAt" date={new Date(this.app.createdAt)} onChangeDate={this._onCreatedAtChange}  />
+                            <DatePicker ref="createdAt" selected={this.state.selectedDate} onChange={this._onCreatedAtChange}  />
                         </div>
                         <div className="form-group">
                             <label>Description</label>

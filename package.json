@@ -18,7 +18,6 @@
     "lodash": "3.6.0",
     "object-assign": "2.0.0",
     "react": "0.13.1",
-    "react-datepicker-component": "1.0.2",
     "react-datepicker": "0.7.0",
     "react-router": "0.13.2",
     "react-select": "^0.4.6",

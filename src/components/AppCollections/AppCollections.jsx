@@ -71,7 +71,7 @@ export default class AppCollections extends React.Component {
                                 let collection = data.collections[i]
                                 return (
                                     <tr>
-                                        <td><img src={collection.picture}/></td>
+                                        <td><img src={collection.picture} width={150}/></td>
                                         <td>
                                             <h4><Link to="app-collection" params={{collectionId: collection._id}} test={"123"}>{collection.name}</Link></h4>
                                         </td>

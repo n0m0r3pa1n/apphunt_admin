@@ -3,7 +3,7 @@
 import React from 'react';
 import {AppsStore} from '../../stores/AppsStore.js'
 import {VotesAPI} from '../../api/VotesAPI.js'
-import SearchForm from './SearchForm.jsx'
+import {SearchForm} from './SearchForm.jsx'
 import AppActions from '../App/AppActions.jsx'
 
 import {DateUtils} from '../../utils/DateUtils.js'

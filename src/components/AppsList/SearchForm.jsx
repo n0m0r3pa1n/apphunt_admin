@@ -7,8 +7,10 @@ import {DateUtils} from '../../utils/DateUtils.js'
 
 var $ = require('jquery')
 var Select = require('react-select');
-var DatePickerInput = require('react-datepicker-component/DatePickerInput.jsx')
+var DatePicker = require('react-datepicker')
 import {AddApp} from '../App/Add/AddApp.jsx'
+
+var moment = require('moment')
 
 var options = [
     { value: 'all', label: 'All'},
@@ -22,8 +24,11 @@ export default class SearchForm extends React.Component {
         super();
         this.currentPlatform = "Android"
         this.currentStatus = "all"
-        this.currentDate = new Date()
         this.shouldFilterAllApps = false;
+        this.currentDate = moment()
+        this.state = {
+            selectedDate: this.currentDate
+        };
 
         this._onPlatformChange = this._onPlatformChange.bind(this);
         this._onStatusChange = this._onStatusChange.bind(this);
@@ -51,7 +56,10 @@ export default class SearchForm extends React.Component {
         this._getApps()
     }
     _onDateChange(date) {
-        this.currentDate = date;
+        this.currentDate = date
+        this.setState({
+            selectedDate: date
+        })
         this._getApps()
     }
 
@@ -61,7 +69,7 @@ export default class SearchForm extends React.Component {
     }
 
     _getApps() {
-        let date = this.currentDate;
+        let date = this.currentDate.toDate();
         if(this.shouldFilterAllApps == true) {
             date = ""
         }
@@ -82,7 +90,7 @@ export default class SearchForm extends React.Component {
                         </form>
                     </div>
                     <div className="input-group-lg col-md-2">
-                        <DatePickerInput date={this.currentDate}  dateFormatter={DateUtils.formatDate} onChangeDate={this._onDateChange}/>
+                        <DatePicker selected={this.state.selectedDate} onChange={this._onDateChange} />
                     </div>
                     <div className="input-group-lg col-lg-1">
                         <label>All apps: <input type="checkbox" onChange={this._shouldShowAllApps}/></label>
