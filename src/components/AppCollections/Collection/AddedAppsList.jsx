@@ -5,6 +5,7 @@ var ReactBootstrap =  require('react-bootstrap')
 var Button = ReactBootstrap.Button
 import {AppCollectionsStore} from '../../../stores/AppCollectionsStore.js'
 import {DateUtils} from '../../../utils/DateUtils.js'
+import {AppCollectionsAPI} from '../../../api/AppCollectionsAPI.js'
 
 export default class AddedAppsList extends React.Component {
     constructor() {
@@ -25,6 +26,11 @@ export default class AddedAppsList extends React.Component {
     _onLoadCollection(data) {
         this.data = data;
         this.setState({data: AppCollectionsStore.getAppCollection()})
+    }
+
+    _removeApp(appId) {
+        let collectionId = this.props.collectionId
+        AppCollectionsAPI.removeApp(collectionId, appId)
     }
 
     render() {
@@ -54,6 +60,7 @@ export default class AddedAppsList extends React.Component {
                         <th>Url</th>
                         <th>Created At</th>
                         <th>Created By</th>
+                        <th>Votes</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -82,13 +89,17 @@ export default class AddedAppsList extends React.Component {
                                         {DateUtils.formatDate(new Date(app.createdAt))}
                                     </td>
                                     <td>
-                                        {app.createdBy}
+                                        {app.createdBy.name}
                                         <br />
                                         {userType}
                                         <br />
                                         {twitterLink} {mailTo}
                                     </td>
                                     <td className="col-md-2">
+                                        {app.votesCount}
+                                    </td>
+                                    <td className="col-md-2">
+                                        <button className="btn btn-danger" style={{marginRight: 10}} onClick={this._removeApp.bind(this, app._id)}>Remove</button>
                                     </td>
                                 </tr>
                             )

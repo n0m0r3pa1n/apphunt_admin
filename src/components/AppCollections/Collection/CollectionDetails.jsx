@@ -53,11 +53,11 @@ export default class CollectionDetails extends React.Component {
                 <div className="col-lg-6">
                     <div className="col-lg-12">
                         <h4>{collection.name}</h4>
-                        <img src={collection.picture}/>
+                        <img src={collection.picture} width={150}/>
                     </div>
                     <div className="col-lg-12">
                         <h3>Apps</h3>
-                        <AddedAppsList/>
+                        <AddedAppsList collectionId={this.collectionId}/>
                     </div>
                 </div>
                 <div className="col-lg-6" style={{borderLeft: "1px solid black"}}>
