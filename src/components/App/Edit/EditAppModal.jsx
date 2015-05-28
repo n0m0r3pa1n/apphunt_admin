@@ -14,15 +14,13 @@ import {AppAPI} from '../../../api/AppAPI.js'
 export var EditAppModal = React.createClass({
 
     getInitialState() {
-        console.log(moment(this.props.app.createdAt))
         return {
             isModalOpen: true,
-            selectedDate: moment(this.props.app.createdAt)
+            selectedDate: moment.utc(this.props.app.createdAt)
         };
     },
     handleToggle() {
         this.props.onModalToggle(!this.state.isModalOpen)
-        console.log("toggle");
         this.setState({
             isModalOpen: !this.state.isModalOpen
 
@@ -32,7 +30,6 @@ export var EditAppModal = React.createClass({
     _updateApp() {
         let appDescription = React.findDOMNode(this.refs.description).value;
         let createdAt = this.state.selectedDate.toDate()
-        console.log(createdAt)
         AppAPI.updateApp(this.appPackage, createdAt, appDescription, this.status)
     },
     componentDidMount() {
