@@ -10,7 +10,7 @@ export var CommentsAPI = {
     self: this,
     reloadComments() {
         if (self.appId !== undefined) {
-            CommentsAPI.getComments(self.appId)
+            CommentsAPI.getUsersScore(self.appId)
         }
     }
     ,

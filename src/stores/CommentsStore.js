@@ -27,7 +27,7 @@ export var CommentsStore = _.extend({}, EventEmitter.prototype, {
 Dispatcher.register(function(payload) {
     var action = payload.action;
     var text;
-    switch(action.action) {
+    switch(action.actionType) {
         case CommentsConstants.LOAD_COMMENTS:
             loadComments(action.data);
             break;

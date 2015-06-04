@@ -2,6 +2,7 @@
 import {BASE_URL, USERS_URL} from '../config/config.js'
 var $ = require("jquery")
 import {DateUtils} from '../utils/DateUtils.js'
+import {UsersActions} from '../actions/UsersActions.js'
 
 var fakeUsersIds = []
 
@@ -31,8 +32,7 @@ export var UsersAPI = {
         }
 
         $.get(url, function(data, status) {
-                console.log("AAAAAA")
-                console.log(data)
+            UsersActions.loadUsersWithScore(data);
         })
     }
 };
