@@ -26,7 +26,7 @@ export var SearchForm = React.createClass({
         var from = this.state.fromDate != null ? this.state.fromDate.toDate() : null;
         var to = this.state.toDate != null ? this.state.toDate.toDate() : null;
 
-        UsersAPI.getUsersScores(from, to)
+        UsersAPI.getUsersScores(from, to, loginType)
     },
 
     onFromChangeDate(date) {

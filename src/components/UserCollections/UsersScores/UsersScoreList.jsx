@@ -29,19 +29,38 @@ export default class UsersScoreList extends React.Component {
 
     render() {
         let data = this.state != null ? this.state.data : []
-        return (
-            <div>
-                {
-                    Object.keys(data).map((field, i) => {
-                        let user = data[i]
-                        console.log(user)
-                        return (
-                            <div>
-                                {user.score} <br />
-                            </div>
-                        )
-                })
-                }
+        return (<div className="row panel">
+                <table className="table table-bordered table-hover panel-body" id="apps_table">
+                    <thead>
+                    <tr>
+                        <th>Picture</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Score</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {
+                        Object.keys(data).map((field, i) => {
+                            let user = data[i]
+                            let type = user.loginType == "fake" ? "fake" : "real"
+                            return (
+                                <tr>
+                                    <td><img src={user.profilePicture} width="100"/></td>
+                                    <td>{user.name}</td>
+                                    <td>{user.username}</td>
+                                    <td>{user.score}</td>
+                                    <td>{type}</td>
+                                    <td></td>
+                                </tr>
+                            )
+                        })
+                    }
+                    </tbody>
+                </table>
             </div>
         )
     }
