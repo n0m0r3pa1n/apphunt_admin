@@ -4,7 +4,9 @@ import React from 'react';
 import AppsListPage from './AppsList/AppsListPage.jsx';
 import AppComments from './Comments/App/AppComments.js';
 import AppCollections from './AppCollections/AppCollections.jsx'
-import CollectionDetails from './AppCollections/Collection/CollectionDetails.jsx'
+import AppCollectionDetails from './AppCollections/Collection/CollectionDetails.jsx'
+import UserCollections from './UserCollections/UserCollections.jsx'
+import UsersScores from './UserCollections/UsersScores/UsersScores.jsx'
 import Nav from './App/Nav.jsx';
 
 (function () {
@@ -20,7 +22,9 @@ import Nav from './App/Nav.jsx';
             <DefaultRoute handler={AppsListPage} />
             <Route name="comments" path="/comments/:appId" handler={AppComments} />
             <Route name="app-collections" path="/app-collections" handler={AppCollections} />
-            <Route name="app-collection" path="/app-collections/:collectionId" handler={CollectionDetails} />
+            <Route name="app-collection" path="/app-collections/:collectionId" handler={AppCollectionDetails} />
+            <Route name="user-collections" path="/user-collections" handler={UserCollections} />
+            <Route name="user-scores" path="/user-scores" handler={UsersScores} />
         </Route>
     );
 

@@ -22,6 +22,7 @@ export default class Nav extends React.Component {
                         <li><a href="#/users">Users</a></li>
                         <li><a href="#/comments">Comments</a></li>
                         <li><a href="#/app-collections">Apps Collections</a></li>
+                        <li><a href="#/user-collections">Users Collections</a></li>
                     </ul>
                 </div>
             </div>
