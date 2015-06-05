@@ -75,6 +75,18 @@ export var AppCollectionsAPI = {
                 console.log("error: " + errorThrown)
             }
         });
+    },
+    removeCollection: function(collectionId) {
+        $.ajax({
+            url: APP_COLLECTIONS_URL + '?collectionId=' + collectionId,
+            type: 'DELETE',
+            success: function (data) {
+                AppCollectionsAPI.reloadCollections()
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error: " + errorThrown)
+            }
+        });
     }
 };
 function formatCollections(collections) {

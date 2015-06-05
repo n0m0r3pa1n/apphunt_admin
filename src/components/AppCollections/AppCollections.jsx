@@ -41,6 +41,9 @@ export default class AppCollections extends React.Component {
         return this.data
     }
 
+    _removeCollection(collectionId) {
+        AppCollectionsAPI.removeCollection(collectionId)
+    }
 
     render() {
         var collections = [];
@@ -73,7 +76,7 @@ export default class AppCollections extends React.Component {
                                     <tr>
                                         <td><img src={collection.picture} width={150}/></td>
                                         <td>
-                                            <h4><Link to="app-collection" params={{collectionId: collection._id}} test={"123"}>{collection.name}</Link></h4>
+                                            <h4><Link to="app-collection" params={{collectionId: collection._id}}>{collection.name}</Link></h4>
                                         </td>
                                         <td className="col-md-4">{collection.description}</td>
                                         <td className="col-md-1">
@@ -86,6 +89,7 @@ export default class AppCollections extends React.Component {
                                             <label>{collection.votesCount}</label>
                                         </td>
                                         <td className="col-md-2">
+                                            <button className="btn btn-danger" style={{marginRight: 10}} onClick={this._removeCollection.bind(this, collection._id)}>Remove</button>
                                         </td>
                                     </tr>
                                 )
