@@ -8,7 +8,23 @@ import {AppsAPI} from './AppsAPI.js'
 
 
 export var UserCollectionsAPI = {
-    createCollection: function(name, description, picture, userId) {
+    addToCollection: function (collectionId, userId, fromDate, toDate) {
+        $.ajax({
+            url: USER_COLLECTIONS_URL + "/" + collectionId,
+            type: 'PUT',
+            data: {
+                users: [userId],
+                fromDate: fromDate,
+                toDate: toDate
+            },
+            success: function (data) {
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error: " + errorThrown)
+            }
+        });
+    },
+    createCollection: function (name, description, picture, userId) {
         $.ajax({
             url: USER_COLLECTIONS_URL,
             type: 'POST',
@@ -37,47 +53,38 @@ export var UserCollectionsAPI = {
             });
         });
     },
-    //getCollection: function (collectionId) {
-    //    this.url = APP_COLLECTIONS_URL + "/" + collectionId
-    //    $.get(this.url, function (data, status) {
-    //        AppCollectionsActions.loadAppCollection({collection: formatCollection(data)})
-    //    });
-    //},
-    //addAppsInCollection: function(collectionId, apps) {
-    //    $.ajax({
-    //        url: APP_COLLECTIONS_URL + "/" + collectionId,
-    //        type: 'PUT',
-    //        data: {
-    //            apps: apps
-    //        },
-    //        success: function (data) {
-    //            AppCollectionsAPI.getCollection(collectionId)
-    //        },
-    //        error: function (jqXHR, textStatus, errorThrown) {
-    //            console.log("error: " + errorThrown)
-    //        }
-    //    });
-    //},
+    getCollection: function (collectionId) {
+        var url = USER_COLLECTIONS_URL + "/" + collectionId;
+        $.get(url, function (data, status) {
+            UserCollectionsActions.loadUserCollection(formatCollection(data));
+        });
+    },
+    getAvailableCollections: function(userId) {
+        var url = USER_COLLECTIONS_URL + "/available?userId=" + userId
+        $.get(url, function (data, status) {
+            UserCollectionsActions.loadUserCollections(formatCollections(data));
+        });
+    },
     reloadCollections: function () {
         $.get(this.url, function (data, status) {
-            UserCollectionsActions.loadAppCollections({
+            UserCollectionsActions.loadUserCollections({
                 collections: formatCollections(data.collections),
                 totalCount: data.totalCount
             });
         });
     },
-    //removeApp: function(collectionId, appId) {
-    //    $.ajax({
-    //        url: APP_COLLECTIONS_URL + "/apps?collectionId=" + collectionId + "&appId=" + appId,
-    //        type: 'DELETE',
-    //        success: function (data) {
-    //            AppCollectionsAPI.getCollection(collectionId)
-    //        },
-    //        error: function (jqXHR, textStatus, errorThrown) {
-    //            console.log("error: " + errorThrown)
-    //        }
-    //    });
-    //}
+    removeUser: function (collectionId, userDetailsId) {
+        $.ajax({
+            url: USER_COLLECTIONS_URL + '/users?collectionId=' + collectionId + "&userDetailsId=" + userDetailsId,
+            type: 'DELETE',
+            success: function (data) {
+                UserCollectionsAPI.getCollection(collectionId)
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error: " + errorThrown)
+            }
+        });
+    }
 };
 function formatCollections(collections) {
     var result = []

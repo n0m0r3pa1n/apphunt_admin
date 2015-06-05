@@ -75,8 +75,7 @@ export default class UserCollections extends React.Component {
                                     <tr>
                                         <td><img src={collection.picture} width={150}/></td>
                                         <td>
-                                            <h4><Link to="app-collection" params={{collectionId: collection._id}}
-                                                      test={"123"}>{collection.name}</Link></h4>
+                                            <h4><Link to="user-collection" params={{collectionId: collection._id}}>{collection.name}</Link></h4>
                                         </td>
                                         <td className="col-md-4">{collection.description}</td>
                                         <td className="col-md-1">

@@ -1,5 +1,6 @@
 import React from 'react';
 import {UsersStore} from '../../../stores/UsersStore.js'
+import {AddUserToCollection} from './Add/AddUserToCollection.jsx'
 
 export default class UsersScoreList extends React.Component {
 
@@ -54,7 +55,7 @@ export default class UsersScoreList extends React.Component {
                                     <td>{user.username}</td>
                                     <td>{user.score}</td>
                                     <td>{type}</td>
-                                    <td></td>
+                                    <td><AddUserToCollection userId={user._id} fromDate={this.props.fromDate} toDate={this.props.toDate}/></td>
                                 </tr>
                             )
                         })

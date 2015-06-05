@@ -8,14 +8,25 @@ export default class UsersScores extends React.Component {
 
     constructor() {
         super();
+        this.onDateRangeChanged = this.onDateRangeChanged.bind(this);
+        this.state = {
+            fromDate: new Date(),
+            toDate: new Date()
+        }
+    }
+
+    onDateRangeChanged(fromDate, toDate) {
+        this.setState({
+            fromDate: fromDate,
+            toDate: toDate
+        })
     }
 
     render() {
-
         return (
             <div>
-                <SearchForm />
-                <UsersScoreList />
+                <SearchForm onDateRangeChanged={this.onDateRangeChanged}/>
+                <UsersScoreList fromDate={this.state.fromDate} toDate={this.state.toDate}/>
             </div>
         )
     }

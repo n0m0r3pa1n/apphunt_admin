@@ -7,6 +7,7 @@ import AppCollections from './AppCollections/AppCollections.jsx'
 import AppCollectionDetails from './AppCollections/Collection/CollectionDetails.jsx'
 import UserCollections from './UserCollections/UserCollections.jsx'
 import UsersScores from './UserCollections/UsersScores/UsersScores.jsx'
+import UserCollection from './UserCollections/UserCollection.jsx'
 import Nav from './App/Nav.jsx';
 
 (function () {
@@ -25,6 +26,7 @@ import Nav from './App/Nav.jsx';
             <Route name="app-collection" path="/app-collections/:collectionId" handler={AppCollectionDetails} />
             <Route name="user-collections" path="/user-collections" handler={UserCollections} />
             <Route name="user-scores" path="/user-scores" handler={UsersScores} />
+            <Route name="user-collection" path="/user-collections/:collectionId" handler={UserCollection} />
         </Route>
     );
 

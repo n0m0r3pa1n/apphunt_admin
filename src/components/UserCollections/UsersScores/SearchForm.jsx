@@ -22,10 +22,9 @@ export var SearchForm = React.createClass({
 
     search() {
         let loginType = React.findDOMNode(this.refs.type).value;
-
         var from = this.state.fromDate != null ? this.state.fromDate.toDate() : null;
         var to = this.state.toDate != null ? this.state.toDate.toDate() : null;
-
+        this.props.onDateRangeChanged(from, to)
         UsersAPI.getUsersScores(from, to, loginType)
     },
 
