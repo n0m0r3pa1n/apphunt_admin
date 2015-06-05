@@ -32,11 +32,11 @@ export var AddUserCollectionModal = React.createClass({
         UserCollectionsAPI.createCollection(name, description, picture, userId);
     },
     componentDidMount() {
-        UserCollectionsStore.addChangeListener(this._onChange);
+        UserCollectionsStore.addLoadUserCollectionsListener(this._onChange);
     },
 
     componentWillUnmount() {
-        UserCollectionsStore.removeChangeListener(this._onChange);
+        UserCollectionsStore.removeLoadUserCollectionsListener(this._onChange);
     },
 
     _onChange(data) {

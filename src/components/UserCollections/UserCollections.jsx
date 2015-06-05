@@ -42,6 +42,9 @@ export default class UserCollections extends React.Component {
         return this.data
     }
 
+    _removeCollection(collectionId) {
+        UserCollectionsAPI.removeCollection(collectionId)
+    }
 
     render() {
         var collections = [];
@@ -85,6 +88,7 @@ export default class UserCollections extends React.Component {
                                             {collection.createdByName}
                                         </td>
                                         <td className="col-md-2">
+                                            <button className="btn btn-danger" style={{marginRight: 10}} onClick={this._removeCollection.bind(this, collection._id)}>Remove</button>
                                         </td>
                                     </tr>
                                 )
