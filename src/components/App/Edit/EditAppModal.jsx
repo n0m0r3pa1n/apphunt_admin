@@ -81,7 +81,7 @@ export var EditAppModal = React.createClass({
                         </div>
                         <div className="form-group">
                             <label>Description</label>
-                            <input type="text" ref="description" className="form-control" value={description} maxlength="100" onChange={this.handleDescriptionChange} required="required"/>
+                            <input type="text" ref="description" className="form-control" value={description} maxLength="100" onChange={this.handleDescriptionChange} required="required"/>
                         </div>
                     </div>
                     <div className="modal-footer">

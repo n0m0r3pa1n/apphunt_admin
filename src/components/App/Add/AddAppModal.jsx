@@ -9,6 +9,8 @@ var Modal = ReactBootstrap.Modal
 import {AppsStore} from '../../../stores/AppsStore.js'
 import {AppAPI} from '../../../api/AppAPI.js'
 
+var $ = require('jquery')
+
 export var AddAppModal = React.createClass({
     getInitialState() {
         return {
@@ -42,6 +44,15 @@ export var AddAppModal = React.createClass({
         this.handleToggle()
     },
 
+    _onKeyUp() {
+        let appDescription = React.findDOMNode(this.refs.app_description).value;
+        var left = 100 - appDescription.length;
+        if (left < 0) {
+            left = 0;
+        }
+        $('#chars_left').text(left);
+    },
+
     render() {
         let isModalOpen = this.state.isModalOpen;
         if (!isModalOpen) {
@@ -65,8 +76,9 @@ export var AddAppModal = React.createClass({
                         </div>
                         <div className="form-group">
                             <label>Description</label>
-                            <label>(characters left) : <span id="chars_left"></span></label>
-                            <textarea className="form-control" ref="app_description" required="required" pattern="[A-Za-z0-9]{1,20}" maxlength="100"></textarea>
+                            <label>(characters left) : <span id="chars_left" style={{color: "red"}}>100</span></label>
+                            <textarea className="form-control" ref="app_description" required="required" pattern="[A-Za-z0-9]{1,20}"
+                                      maxLength="100" onKeyUp={this._onKeyUp}></textarea>
                         </div>
                     </div>
                     <div className="modal-footer">
