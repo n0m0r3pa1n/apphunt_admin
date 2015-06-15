@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {StatsActions} from '../../actions/StatsActions.js'
+import {StatsActions} from '../../actions/stats/StatsActions.js'
 var DatePicker = require('react-datepicker')
 var moment = require('moment')
 
