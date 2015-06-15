@@ -1,0 +1,1 @@
+export var USER_LOGGED_IN = "user.logged.in"

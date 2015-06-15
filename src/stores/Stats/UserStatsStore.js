@@ -7,6 +7,11 @@ var StatsConstants = require('../../constants/StatsConstants')
 var PayloadConstants = require('../../constants/PayloadConstants')
 var _ = require('lodash');
 
+var basicData = {}
+var loadBasicData = function(data) {
+    basicData = data;
+}
+
 export var UserStatsStore = _.extend({}, EventEmitter.prototype, {
     getApps: function() {
         return data;
@@ -19,6 +24,9 @@ export var UserStatsStore = _.extend({}, EventEmitter.prototype, {
     },
     removeChangeListener: function(callback) {
         this.removeListener('change', callback);
+    },
+    getBasicStatsData: function() {
+        return basicData;
     }
 })
 
@@ -36,7 +44,6 @@ function handleViewAction(payload) {
     var action = payload.action;
     switch(action.actionType) {
         case StatsConstants.STATS_PERIOD_CHANGE:
-            console.log(action.data)
             UserStatsAPI.updateStats(DateUtils.formatDate(action.data.fromDate.toDate()), DateUtils.formatDate(action.data.toDate.toDate()))
             break;
 
@@ -49,10 +56,11 @@ function handleServerAction(payload) {
     var action = payload.action;
     switch(action.actionType) {
         case StatsConstants.LOAD_USER_STATS:
-            console.log(payload)
+            loadBasicData(action.data)
             break;
         default:
             return true;
     }
+
     UserStatsStore.emitChange();
 }
