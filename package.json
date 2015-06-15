@@ -19,7 +19,7 @@
     "object-assign": "2.0.0",
     "react": "0.13.1",
     "react-datepicker": "0.7.0",
-    "react-router": "0.13.2",
+    "react-router": "0.13.3",
     "react-select": "^0.4.6",
     "react-bootstrap": "0.20.3",
     "moment": "2.10.3"

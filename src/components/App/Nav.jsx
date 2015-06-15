@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import {Link} from 'react-router'
 
 export default class Nav extends React.Component {
     render() {
@@ -23,6 +24,7 @@ export default class Nav extends React.Component {
                         <li><a href="#/comments">Comments</a></li>
                         <li><a href="#/app-collections">Apps Collections</a></li>
                         <li><a href="#/user-collections">Users Collections</a></li>
+                        <li><a href="#/user-stats">User Stats</a></li>
                     </ul>
                 </div>
             </div>

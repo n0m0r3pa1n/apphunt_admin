@@ -2,6 +2,7 @@
 
 import React from 'react';
 import AppsListPage from './AppsList/AppsListPage.jsx';
+import UserStatsPage from './Stats/Users/UserStatsPage.jsx';
 import AppComments from './Comments/App/AppComments.js';
 import AppCollections from './AppCollections/AppCollections.jsx'
 import AppCollectionDetails from './AppCollections/Collection/CollectionDetails.jsx'
@@ -27,6 +28,7 @@ import Nav from './App/Nav.jsx';
             <Route name="user-collections" path="/user-collections" handler={UserCollections} />
             <Route name="user-scores" path="/user-scores" handler={UsersScores} />
             <Route name="user-collection" path="/user-collections/:collectionId" handler={UserCollection} />
+            <Route name="user-stats" path="/user-stats" handler={UserStatsPage} />
         </Route>
     );
 
@@ -40,8 +42,4 @@ import Nav from './App/Nav.jsx';
         let query = state.query;
         React.render(<Handler params={params} query={query} />, document.getElementById('content'));
     });
-
 })();
-
-//
-//
