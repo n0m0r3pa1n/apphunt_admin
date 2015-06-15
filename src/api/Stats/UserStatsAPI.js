@@ -6,8 +6,11 @@ import {UserStatsActions} from '../../actions/stats/UserStatsActions.js'
 var $ = require("jquery")
 
 export var UserStatsAPI = {
-   updateStats: function(fromDate, toDate) {
-       this.url = FLURRY_GENERAL_STATS_URL + "&startDate=2015-06-04&endDate=2015-06-15"
+   updateStats: function(fromDate, toDate, version) {
+       this.url = FLURRY_GENERAL_STATS_URL + "&startDate="+fromDate+"&endDate=" + toDate
+       if(version !== "all") {
+           this.url += "&versionName=" + version
+       }
        $.get(this.url, function(data, status) {
            UserStatsActions.loadUserStats(data);
        });

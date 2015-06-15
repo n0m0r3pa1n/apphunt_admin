@@ -44,7 +44,8 @@ function handleViewAction(payload) {
     var action = payload.action;
     switch(action.actionType) {
         case StatsConstants.STATS_PERIOD_CHANGE:
-            UserStatsAPI.updateStats(DateUtils.formatDate(action.data.fromDate.toDate()), DateUtils.formatDate(action.data.toDate.toDate()))
+            UserStatsAPI.updateStats(DateUtils.formatDate(action.data.fromDate.toDate()), DateUtils.formatDate(action.data.toDate.toDate()),
+            action.data.version)
             break;
 
         default:

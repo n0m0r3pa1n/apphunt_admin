@@ -7,5 +7,11 @@ export var StatsActions = {
             actionType: StatsConstants.STATS_PERIOD_CHANGE,
             data: data
         })
+    },
+    loadAppVersions: function(data) {
+        Dispatcher.handleServerAction({
+            actionType: StatsConstants.LOAD_APP_INFO,
+            data: data
+        })
     }
 };

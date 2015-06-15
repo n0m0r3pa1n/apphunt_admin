@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import StatsDatePicker from '../StatsDatePicker.js'
+import StatsDatePicker from '../StatsSearchPicker.js'
 import BasicUserStats from './BasicUserStats.js'
 
 export default class UserStatsPage extends React.Component {
