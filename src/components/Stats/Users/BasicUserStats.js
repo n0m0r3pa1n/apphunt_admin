@@ -36,7 +36,8 @@ export default class BasicUserStats extends React.Component {
     render() {
         let events = this.state.data.event;
         let userLoggedInEvent = this.findEvent(events, Events.USER_LOGGED_IN);
-        let userReplies = this.findEvent(events, Events.USER_LOGGED_IN);
+        let userCommentsEvent = this.findEvent(events, Events.USER_COMMENTED);
+        let userVotedAppEvent = this.findEvent(events, Events.USER_VOTED_APP);
 
         if(events.length == 0) {
             return (<div></div>);
@@ -53,15 +54,21 @@ export default class BasicUserStats extends React.Component {
                         <td>
                             User comments
                         </td>
+                        <td>
+                            User votes for apps
+                        </td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            { userLoggedInEvent['@totalSessions'] }
+                            { userLoggedInEvent['@totalCount'] }
                         </td>
                         <td>
-
+                            { userCommentsEvent['@totalCount'] }
+                        </td>
+                        <td>
+                            { userVotedAppEvent['@totalCount'] }
                         </td>
                     </tr>
                     </tbody>

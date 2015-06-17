@@ -20,6 +20,7 @@ export default class StatsSearchPicker extends React.Component {
         this.onChange = this.onChange.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
         this.componentWillUnmount = this.componentWillUnmount.bind(this)
+        this.version = "all"
         this.state = {
             fromDate: moment(),
             toDate: moment(),
