@@ -10,4 +10,4 @@ export var USERS_URL = BASE_URL + "users"
 
 export var FLURRY_GENERAL_STATS_URL = FLURRY_BASE_URL + "eventMetrics/Summary?apiAccessCode="+FLURRY_API_ACCESS_CODE+"&apiKey=" +
     FLURRY_API_KEY
-export var FLURRY_APP_INFO_URL =FLURRY_BASE_URL + "appInfo/getApplication?apiAccessCode="+FLURRY_API_ACCESS_CODE+"&apiKey=" + FLURRY_API_KEY
+export var FLURRY_APP_INFO_URL = FLURRY_BASE_URL + "appInfo/getApplication?apiAccessCode="+FLURRY_API_ACCESS_CODE+"&apiKey=" + FLURRY_API_KEY

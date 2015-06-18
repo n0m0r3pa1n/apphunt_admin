@@ -45,9 +45,11 @@ function handleViewAction(payload) {
     switch(action.actionType) {
         case StatsConstants.STATS_PERIOD_CHANGE:
             UserStatsAPI.updateStats(DateUtils.formatDate(action.data.fromDate.toDate()), DateUtils.formatDate(action.data.toDate.toDate()),
-            action.data.version)
-            break;
+                action.data.version);
 
+            UserStatsAPI.updateActiveUsers(DateUtils.formatDate(action.data.fromDate.toDate()), DateUtils.formatDate(action.data.toDate.toDate()),
+                action.data.version);
+            break;
         default:
             return true;
     }

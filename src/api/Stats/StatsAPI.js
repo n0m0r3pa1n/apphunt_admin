@@ -7,8 +7,8 @@ var $ = require("jquery")
 
 export var StatsAPI = {
     getAppVersions: function() {
-        $.get(FLURRY_APP_INFO_URL, function(data, status) {
+        $.get(FLURRY_APP_INFO_URL, function(data) {
             StatsActions.loadAppVersions(data);
-        });
+        })
     }
 };
