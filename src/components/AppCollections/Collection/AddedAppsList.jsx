@@ -58,6 +58,7 @@ export default class AddedAppsList extends React.Component {
                         <th>Name</th>
                         <th>Description</th>
                         <th>Url</th>
+                        <th>ShortUrl</th>
                         <th>Created At</th>
                         <th>Created By</th>
                         <th>Votes</th>
@@ -85,6 +86,7 @@ export default class AddedAppsList extends React.Component {
                                     </td>
                                     <td className="col-md-4">{app.description}</td>
                                     <td><a href={app.url} target="_blank">URL</a></td>
+                                    <td><a href={app.shortUrl} target="_blank">ShortURL</a></td>
                                     <td className="col-md-1">
                                         {DateUtils.formatDate(new Date(app.createdAt))}
                                     </td>
