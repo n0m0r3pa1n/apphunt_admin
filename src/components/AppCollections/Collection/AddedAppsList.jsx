@@ -58,7 +58,7 @@ export default class AddedAppsList extends React.Component {
                         <th>Name</th>
                         <th>Description</th>
                         <th>Url</th>
-                        <th>ShortUrl</th>
+                        <th>sUrl</th>
                         <th>Created At</th>
                         <th>Created By</th>
                         <th>Votes</th>
@@ -86,7 +86,7 @@ export default class AddedAppsList extends React.Component {
                                     </td>
                                     <td className="col-md-4">{app.description}</td>
                                     <td><a href={app.url} target="_blank">URL</a></td>
-                                    <td><a href={app.shortUrl} target="_blank">ShortURL</a></td>
+                                    <td><a href={app.shortUrl} target="_blank">sURL</a></td>
                                     <td className="col-md-1">
                                         {DateUtils.formatDate(new Date(app.createdAt))}
                                     </td>
@@ -101,7 +101,7 @@ export default class AddedAppsList extends React.Component {
                                         {app.votesCount}
                                     </td>
                                     <td className="col-md-2">
-                                        <button className="btn btn-danger" style={{marginRight: 10}} onClick={this._removeApp.bind(this, app._id)}>Remove</button>
+                                        <button className="btn btn-danger" style={{marginRight: 10}} onClick={this._removeApp.bind(this, app._id)}><span className="glyphicon glyphicon-remove"></span></button>
                                     </td>
                                 </tr>
                             )
