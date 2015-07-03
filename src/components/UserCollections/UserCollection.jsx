@@ -64,9 +64,9 @@ export default class UserCollection extends React.Component {
                         <td>Picture</td>
                         <td>Name</td>
                         <td>Score</td>
+                        <td>Apps</td>
                         <td>Comments</td>
                         <td>Votes</td>
-                        <td>Apps</td>
                         <td>Actions</td>
                     </tr>
                     </thead>
@@ -74,6 +74,7 @@ export default class UserCollection extends React.Component {
                     {
                         Object.keys(users).map((index, user) => {
                             var details = users[index]
+                            let twitterHref = "https://twitter.com/" + details.user.username
                             return (
                                 <tr>
                                     <td>
@@ -81,18 +82,21 @@ export default class UserCollection extends React.Component {
                                     </td>
                                     <td>
                                         {details.user.name}
+                                        <div>
+                                            <a href={twitterHref} target="_blank"><span className="glyphicon glyphicon-comment"></span></a>
+                                        </div>
                                     </td>
                                     <td>
                                         {details.score}
+                                    </td>
+                                    <td>
+                                        {details.addedApps}
                                     </td>
                                     <td>
                                         {details.comments}
                                     </td>
                                     <td>
                                         {details.votes}
-                                    </td>
-                                    <td>
-                                        {details.addedApps}
                                     </td>
                                     <td>
                                         <button className="btn btn-danger" style={{marginRight: 10}} onClick={this._removeUser.bind(this, details._id)}>Remove</button>
