@@ -72,7 +72,7 @@ export default class AddedAppsList extends React.Component {
                             let app = apps[i]
                             let userType = app.creatorType != 'fake' ? '(real)' : ''
                             let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}><span className="glyphicon glyphicon-envelope"></span></a> : ""
-                            let twitterHref = "https://twitter.com/" + app.createdBy
+                            let twitterHref = "https://twitter.com/" + app.createdBy.username
                             let twitterLink = app.creatorType != 'fake' ?
                                 <a href={twitterHref} target="_blank"><span className="glyphicon glyphicon-comment"></span></a> :
                                 <div></div>
