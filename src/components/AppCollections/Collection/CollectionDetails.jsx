@@ -62,7 +62,7 @@ export default class CollectionDetails extends React.Component {
                 </div>
                 <div className="col-lg-6" style={{borderLeft: "1px solid black"}}>
                     <SearchForm />
-                    <SearchResultsList collectionId={this.collectionId}/>
+                    <SearchResultsList collectionId={this.collectionId} />
                 </div>
 
             </div>

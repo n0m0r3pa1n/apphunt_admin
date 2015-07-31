@@ -7,17 +7,45 @@ var Button = ReactBootstrap.Button
 import {DateUtils} from '../../../utils/DateUtils.js'
 import {AppsStore} from '../../../stores/AppsStore.js'
 import AppsList from '../../AppsList/AppsList.jsx'
+var APP_HUNT_ID = require("../../../constants/AppHuntConstrants.js").APP_HUNT_ID
 
 import {AppCollectionsAPI} from '../../../api/AppCollectionsAPI.js'
+import {AppCollectionsStore} from '../../../stores/AppCollectionsStore.js'
 
 export default class SearchResultsList extends AppsList {
     constructor(props) {
         super(props);
         this.collectionId = props.collectionId
+
+        this._onLoadAppCollection = this._onLoadAppCollection.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
+        this.componentWillUnmount = this.componentWillUnmount.bind(this);
+
+        AppCollectionsAPI.getCollection(this.collectionId);
+    }
+
+    componentWillMount() {
+        AppCollectionsStore.addLoadAppCollectionListener(this._onLoadAppCollection);
+    }
+
+    componentWillUnmount() {
+        AppCollectionsStore.removeLoadAppCollectionListener(this._onLoadAppCollection);
+    }
+
+    _onLoadAppCollection(data) {
+        var collection = AppCollectionsStore.getAppCollection().collection;
+        var appIds = []
+        for (var i = 0; i < collection.apps.length; i++) {
+            appIds.push(collection.apps[i]._id)
+        }
+        collection.apps = appIds
+        this.collection = collection
+
     }
 
     addToCollection(appId) {
-        AppCollectionsAPI.addAppsInCollection(this.collectionId, [appId])
+        this.collection.apps.push(appId)
+        AppCollectionsAPI.addAppsInCollection(this.collection, APP_HUNT_ID)
     }
 
     render() {

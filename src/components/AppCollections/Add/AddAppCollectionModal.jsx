@@ -6,6 +6,8 @@ var OverlayMixin = ReactBootstrap.OverlayMixin
 var Button = ReactBootstrap.Button
 var Modal = ReactBootstrap.Modal
 
+var APP_HUNT_ID = require("../../../constants/AppHuntConstrants").APP_HUNT_ID
+
 import {AppCollectionsStore} from '../../../stores/AppCollectionsStore.js'
 import {AppCollectionsAPI} from '../../../api/AppCollectionsAPI.js'
 
@@ -24,7 +26,7 @@ export var AddAppCollectionModal = React.createClass({
     },
 
     _submitCollection() {
-        let userId = "54be5d68e4b0d3cacca686c5";
+        let userId = APP_HUNT_ID;
         let name =  React.findDOMNode(this.refs.name).value;
         let description = React.findDOMNode(this.refs.description).value;
         let picture = React.findDOMNode(this.refs.picture).value;

@@ -41,12 +41,14 @@ export var AppCollectionsAPI = {
             AppCollectionsActions.loadAppCollection({collection: formatCollection(data)})
         });
     },
-    addAppsInCollection: function(collectionId, apps) {
+    addAppsInCollection: function(collection, userId) {
+        var collectionId = collection._id
+        var url = APP_COLLECTIONS_URL + "/" + collectionId + "?userId=" + userId
         $.ajax({
-            url: APP_COLLECTIONS_URL + "/" + collectionId,
+            url: url,
             type: 'PUT',
             data: {
-                apps: apps
+                collection: collection
             },
             success: function (data) {
                 AppCollectionsAPI.getCollection(collectionId)
