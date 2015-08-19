@@ -66,6 +66,7 @@ export default class UserCollection extends React.Component {
                         <td>Score</td>
                         <td>Apps</td>
                         <td>Comments</td>
+                        <td>Collections</td>
                         <td>Votes</td>
                         <td>Actions</td>
                     </tr>
@@ -94,6 +95,9 @@ export default class UserCollection extends React.Component {
                                     </td>
                                     <td>
                                         {details.comments}
+                                    </td>
+                                    <td>
+                                        {details.collections}
                                     </td>
                                     <td>
                                         {details.votes}
