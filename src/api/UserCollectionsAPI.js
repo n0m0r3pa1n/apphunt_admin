@@ -5,6 +5,7 @@ var $ = require("jquery")
 import {USER_COLLECTIONS_URL} from '../config/config.js'
 import {UserCollectionsActions} from '../actions/UserCollectionsActions.js'
 import {AppsAPI} from './AppsAPI.js'
+import {DateUtils} from '../utils/DateUtils.js'
 
 
 export var UserCollectionsAPI = {
@@ -14,8 +15,8 @@ export var UserCollectionsAPI = {
             type: 'PUT',
             data: {
                 users: [userId],
-                fromDate: fromDate,
-                toDate: toDate
+                fromDate: DateUtils.formatDate(fromDate),
+                toDate: DateUtils.formatDate(toDate)
             },
             success: function (data) {
             },

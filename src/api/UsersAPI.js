@@ -30,10 +30,8 @@ export var UsersAPI = {
             var toStr = DateUtils.formatDate(toDate)
             url += "&toDate=" + toStr
         }
-
         $.get(url, function (data, status) {
             var users = []
-            console.log(loginType)
             data.forEach((user) => {
                 if (loginType == "fake" && user.loginType == "fake") {
                     users.push(user)

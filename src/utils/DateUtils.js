@@ -1,8 +1,8 @@
 var moment = require('moment')
 import {WEEK_DAYS} from '../constants/DaysEnum.js'
 export var DateUtils = {
-    getDoubleDigitDate: function(dateStr) {
-        if(dateStr === "") {
+    getDoubleDigitDate: function (dateStr) {
+        if (dateStr === "") {
             return;
         }
 
@@ -11,27 +11,22 @@ export var DateUtils = {
         var month = split[1];
         var day = split[2];
 
-        if(month.length === 1) {
-            month = "0" + month;
-        }
-
-        if(day.length === 1) {
-            day = "0" + day;
-        }
+        month = getFormattedNumber(month)
+        day = getFormattedNumber(day)
 
         return year + "-" + month + "-" + day;
     },
-    formatDate: function(date) {
-        if(date === '') {
+    formatDate: function (date) {
+        if (date === '') {
             return;
         }
         var output = '';
-        output+=date.getFullYear() + '-';
-        output+=date.getMonth()+1+'-';
-        output+=date.getDate();
+        output += date.getFullYear() + '-';
+        output += getFormattedNumber(date.getMonth() + 1) + '-';
+        output += getFormattedNumber(date.getDate());
         return output;
     },
-    getWeeksInDate: function(fromDate, toDate) {
+    getWeeksInDate: function (fromDate, toDate) {
         fromDate = new Date();
         toDate = new Date();
 
@@ -41,14 +36,14 @@ export var DateUtils = {
         let weeks = []
         let period = {}
         let currentDate = moment(fromDate)
-        for(let i= 0; i <= daysBetween; i++) {
+        for (let i = 0; i <= daysBetween; i++) {
             currentDate = moment(fromDate).add(i, 'days').toDate()
 
-            if(moment(currentDate).days() == 1 || i == 0) {
+            if (moment(currentDate).days() == 1 || i == 0) {
                 period.fromDate = currentDate;
             }
 
-            if(moment(currentDate).days() == 0 || i == daysBetween) {
+            if (moment(currentDate).days() == 0 || i == daysBetween) {
                 period.toDate = currentDate;
                 weeks.push(period)
                 period = {}
@@ -58,6 +53,14 @@ export var DateUtils = {
         return weeks;
     }
 };
+
+function getFormattedNumber(number) {
+    if(typeof number == 'string') {
+        return number.length === 1 ? "0" + number : number;
+    } else {
+        return number < 10 ? "0" + number : number;
+    }
+}
 
 function getNumberOfDaysBetween(firstDate, secondDate) {
     var one = new Date(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
