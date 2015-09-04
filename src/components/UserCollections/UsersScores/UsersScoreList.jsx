@@ -37,6 +37,10 @@ export default class UsersScoreList extends React.Component {
                         <th>Picture</th>
                         <th>Name</th>
                         <th>Username</th>
+                        <th>Apps</th>
+                        <th>Comments</th>
+                        <th>Collections</th>
+                        <th>Votes</th>
                         <th>Score</th>
                         <th>Type</th>
                         <th>Actions</th>
@@ -51,8 +55,12 @@ export default class UsersScoreList extends React.Component {
                             return (
                                 <tr>
                                     <td><img src={user.profilePicture} width="100"/></td>
-                                    <td>{user.name}</td>
+                                    <td>{user.name} <a href={'mailto:' + user.email}>Email</a></td>
                                     <td>{user.username}</td>
+                                    <td>{user.apps}</td>
+                                    <td>{user.comments}</td>
+                                    <td>{user.collections}</td>
+                                    <td>{user.votes}</td>
                                     <td>{user.score}</td>
                                     <td>{type}</td>
                                     <td><AddUserToCollection userId={user._id} fromDate={this.props.fromDate} toDate={this.props.toDate}/></td>
