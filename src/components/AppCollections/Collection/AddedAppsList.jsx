@@ -67,10 +67,10 @@ export default class AddedAppsList extends React.Component {
                     </thead>
                     <tbody>
                     {
-
                         Object.keys(apps).map( (field, i) => {
                             let app = apps[i]
-                            let userType = app.creatorType != 'fake' ? '(real)' : ''
+                            let userType = app.createdBy.loginType != 'fake' ? '(real)' : ''
+
                             let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}><span className="glyphicon glyphicon-envelope"></span></a> : ""
                             let twitterHref = "https://twitter.com/" + app.createdBy.username
                             let twitterLink = app.creatorType != 'fake' ?
