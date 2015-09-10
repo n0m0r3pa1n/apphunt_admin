@@ -5,12 +5,15 @@ var UsersConstants = require('../constants/UsersConstants.js')
 var _ = require('lodash');
 
 var data = {}
-function loadUserScores(newData) {
+function loadData(newData) {
     data = newData;
 }
 
 export var UsersStore = _.extend({}, EventEmitter.prototype, {
     getUsersScore: function() {
+        return data;
+    },
+    getUsers: function() {
         return data;
     },
     emitChange: function() {
@@ -28,9 +31,9 @@ Dispatcher.register(function(payload) {
     var action = payload.action;
     switch(action.actionType) {
         case UsersConstants.LOAD_USER_SCORES:
-            loadUserScores(action.data);
+        case UsersConstants.LOAD_USERS:
+            loadData(action.data);
             break;
-
         default:
             return true;
     }

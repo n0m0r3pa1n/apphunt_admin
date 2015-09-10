@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import {Link} from 'react-router'
 
 export default class Nav extends React.Component {
     render() {
@@ -20,11 +19,12 @@ export default class Nav extends React.Component {
                 <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul className="nav navbar-nav">
                         <li className="active"><a href="#">Apps <span className="sr-only">(current)</span></a></li>
-                        <li><a href="#/users">Users</a></li>
+
                         <li><a href="#/comments">Comments</a></li>
                         <li><a href="#/app-collections">Apps Collections</a></li>
                         <li><a href="#/user-collections">Users Collections</a></li>
                         <li><a href="#/user-stats">User Stats</a></li>
+                        <li><a href="#/users">Users</a></li>
                     </ul>
                 </div>
             </div>

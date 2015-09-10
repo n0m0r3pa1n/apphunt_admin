@@ -4,6 +4,7 @@ import React from 'react';
 import {ConfirmNotification} from '../Users/Notifications/ConfirmNotification.js'
 import {NotificationsStore} from '../../stores/NotificationsStore.js'
 import {NotificationsAPI} from '../../api/NotificationsAPI.js'
+import {UsersList} from '../Users/UsersList.jsx'
 var Select = require('react-select');
 
 export default class Users extends React.Component {
@@ -73,6 +74,7 @@ export default class Users extends React.Component {
                 <input type="text" ref="image" className="form-control"/>
             </div>
             <ConfirmNotification onSave={this._onSave}/>
+            <UsersList />
         </div>
 
     }

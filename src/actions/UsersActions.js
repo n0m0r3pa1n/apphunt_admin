@@ -6,5 +6,11 @@ export var UsersActions = {
             actionType: UsersConstants.LOAD_USER_SCORES,
             data: data
         })
+    },
+    loadUsers: function(data) {
+        Dispatcher.handleServerAction({
+            actionType: UsersConstants.LOAD_USERS,
+            data: data
+        })
     }
 };

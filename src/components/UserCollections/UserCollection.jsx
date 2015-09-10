@@ -8,11 +8,12 @@ import {DateUtils} from '../../utils/DateUtils.js'
 import {AddUserCollection} from './Add/AddUserCollection.jsx'
 import {UserCollectionsAPI} from '../../api/UserCollectionsAPI.js'
 import {UserCollectionsStore} from '../../stores/UserCollectionsStore.js'
+import {UsersAPI} from '../../api/UsersAPI.js'
 
 export default class UserCollection extends React.Component {
-
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
+        UsersAPI.getUsers(null, null, null, null)
         this.getUsersCollection = this.getUsersCollection.bind(this);
         this._onLoadUserCollection = this._onLoadUserCollection.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
