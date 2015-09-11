@@ -18,11 +18,19 @@ export var UsersAPI = {
         var index = Math.floor(Math.random() * fakeUsersIds.length)
         return fakeUsersIds[index]
     },
-    getUsers(q, loginType, page, pageSize) {
+    getLoginTypes() {
+        var url = USERS_URL + "/logintypes"
+        $.get(url, function (data, status) {
+            console.log(data)
+            UsersActions.loadLoginTypes(data);
+        })
+    },
+    getUsers(q, loginType, page, pageSize, reset) {
         var url = USERS_URL
         var query = {}
-        if(q != null) {
+        if(q != null && q != '') {
             query.q = q
+
         }
 
         if(loginType != null) {
@@ -38,7 +46,8 @@ export var UsersAPI = {
         }
 
         $.get(url + "?" + $.param(query), function (data, status) {
-            UsersActions.loadUsersWithScore(data);
+            console.log(data, status)
+            UsersActions.loadUsers(data);
         })
     },
     getUsersScores: function (fromDate, toDate, loginType) {

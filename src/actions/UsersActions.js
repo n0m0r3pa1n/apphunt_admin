@@ -12,5 +12,11 @@ export var UsersActions = {
             actionType: UsersConstants.LOAD_USERS,
             data: data
         })
+    },
+    loadLoginTypes: function(data) {
+        Dispatcher.handleServerAction({
+            actionType: UsersConstants.LOAD_LOGIN_TYPES,
+            data: data
+        })
     }
 };

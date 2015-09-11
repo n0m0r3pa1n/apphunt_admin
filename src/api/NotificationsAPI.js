@@ -14,6 +14,7 @@ export var NotificationsAPI = {
 
     sendNotifications: function(users, title, message, image, type) {
         var url = BASE_URL + "notifications/actions/send"
+        console.log(users)
         $.ajax({
             url: url,
             type: 'POST',
@@ -25,6 +26,7 @@ export var NotificationsAPI = {
                 type: type
             },
             success: function (data) {
+                console.log(data)
                 NotificationActions.notificationSent()
             },
             error: function (jqXHR, textStatus, errorThrown) {

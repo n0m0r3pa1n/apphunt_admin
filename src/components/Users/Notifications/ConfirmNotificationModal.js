@@ -26,7 +26,9 @@ export var ConfirmNotificationModal = React.createClass({
     },
 
     _sendNotification() {
-        this.props.onSave()    },
+        this.props.onSave()
+    },
+
     componentDidMount() {
         NotificationsStore.addChangeListener(this._onChange)
     },
@@ -50,7 +52,7 @@ export var ConfirmNotificationModal = React.createClass({
                 <form>
                     <div className="modal-content">
                         <div className="modal-body">
-                            Are you sure you want to send notification to all users?
+                            Are you sure you want to send notification to the selected users?
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-primary save_app" data-dismiss="modal" onClick={this._sendNotification}>Save</button>

@@ -2,10 +2,21 @@
 
 import React from 'react';
 import {ConfirmNotification} from '../Users/Notifications/ConfirmNotification.js'
+import {UsersStore} from '../../stores/UsersStore.js'
 import {NotificationsStore} from '../../stores/NotificationsStore.js'
 import {NotificationsAPI} from '../../api/NotificationsAPI.js'
 import {UsersList} from '../Users/UsersList.jsx'
+import SearchUsersForm from '../../components/Users/SearchUsersForm.jsx'
 var Select = require('react-select');
+
+
+
+var defaultState = {
+    data: [],
+    query: "",
+    loginType: "real",
+    reset: true
+}
 
 export default class Users extends React.Component {
     constructor() {
@@ -16,17 +27,22 @@ export default class Users extends React.Component {
         this.componentWillUnmount = this.componentWillUnmount.bind(this)
         this._onTypeChange = this._onTypeChange.bind(this)
         this._onSave = this._onSave.bind(this)
+        this.onSearch = this.onSearch.bind(this)
+        this.state = defaultState
     }
     componentDidMount() {
         NotificationsStore.addChangeListener(this._onChange);
+        UsersStore.addChangeListener(this._onChange);
     }
 
     componentWillUnmount() {
         NotificationsStore.removeChangeListener(this._onChange);
+        UsersStore.removeChangeListener(this._onChange);
     }
 
     _onChange() {
-        this.setState({data: NotificationsStore.getTypes()})
+        defaultState.data = NotificationsStore.getTypes()
+        this.setState(defaultState)
     }
 
     _onTypeChange(type) {
@@ -38,8 +54,16 @@ export default class Users extends React.Component {
         let title = React.findDOMNode(this.refs.title).value
         let message = React.findDOMNode(this.refs.message).value
         let image = React.findDOMNode(this.refs.image).value
+        let selectedUserIds = this.refs['UserList'].getSelectedUserIds()
 
-        NotificationsAPI.sendNotifications([], title, message, image, type)
+        NotificationsAPI.sendNotifications(selectedUserIds, title, message, image, type)
+    }
+
+    onSearch(query, loginType) {
+        defaultState.query = query
+        defaultState.loginType = loginType
+        this.setState(defaultState)
+        this.refs['UserList'].updateState()
     }
 
     render() {
@@ -74,7 +98,8 @@ export default class Users extends React.Component {
                 <input type="text" ref="image" className="form-control"/>
             </div>
             <ConfirmNotification onSave={this._onSave}/>
-            <UsersList />
+            <SearchUsersForm onSearch={this.onSearch.bind(this)} />
+            <UsersList ref="UserList" query={this.state.query} loginType={this.state.loginType} />
         </div>
 
     }

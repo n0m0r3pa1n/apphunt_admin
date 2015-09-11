@@ -10,7 +10,7 @@ export var ConfirmNotification = React.createClass({
     mixins: [OverlayMixin],
     render() {
         return (
-            <Button onClick={this.handleToggle} bsStyle='primary'>Send to all users</Button>
+           <Button onClick={this.handleToggle} bsStyle='primary'>Send</Button>
         );
     },
     getInitialState() {
