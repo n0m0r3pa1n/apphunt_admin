@@ -10,6 +10,7 @@ import UserCollections from './UserCollections/UserCollections.jsx'
 import UsersScores from './UserCollections/UsersScores/UsersScores.jsx'
 import UserCollection from './UserCollections/UserCollection.jsx'
 import Users from './Users/Users.jsx'
+import Version from './Version/Version.jsx'
 import Nav from './App/Nav.jsx';
 
 (function () {
@@ -31,6 +32,7 @@ import Nav from './App/Nav.jsx';
             <Route name="user-collection" path="/user-collections/:collectionId" handler={UserCollection} />
             <Route name="user-stats" path="/user-stats" handler={UserStatsPage} />
             <Route name="users" path="/users" handler={Users} />
+            <Route name="version" path="/version" handler={Version} />
         </Route>
     );
 
