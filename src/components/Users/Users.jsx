@@ -69,8 +69,8 @@ export default class Users extends React.Component {
     render() {
         var data = this.state !== null ? this.state.data : []
         var options = []
-        for(let index in data) {
-            var type = data[index]
+        for(var i=0; i < data.length; i++) {
+            var type = data[i]
             options.push({value: type, label: type})
         }
 

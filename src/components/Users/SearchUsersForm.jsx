@@ -52,7 +52,8 @@ export default class SearchUsersForm extends React.Component {
     render() {
         var loginTypes = this.state.loginTypes
         var options = []
-        for(let type of loginTypes) {
+        for(var i =0; i< loginTypes.length; i++) {
+            var type = loginTypes[i]
             options.push({value: type, label: type})
         }
 
