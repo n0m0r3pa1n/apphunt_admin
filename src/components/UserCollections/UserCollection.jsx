@@ -11,8 +11,8 @@ import {UserCollectionsStore} from '../../stores/UserCollectionsStore.js'
 import {UsersAPI} from '../../api/UsersAPI.js'
 
 export default class UserCollection extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         UsersAPI.getUsers(null, null, null, null)
         this.getUsersCollection = this.getUsersCollection.bind(this);
         this._onLoadUserCollection = this._onLoadUserCollection.bind(this);
