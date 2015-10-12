@@ -76,7 +76,9 @@ export default class UserCollection extends React.Component {
                     {
                         Object.keys(users).map((index, user) => {
                             var details = users[index]
-                            let twitterHref = "https://twitter.com/" + details.user.username
+                            console.log(details.user)
+                            let loginType = details.user.loginType
+                            let twitterHref = loginType =="twitter" ? "https://twitter.com/" + details.user.username : ""
                             return (
                                 <tr>
                                     <td>
@@ -84,6 +86,8 @@ export default class UserCollection extends React.Component {
                                     </td>
                                     <td>
                                         {details.user.name}
+                                        <br />
+                                        ({loginType})
                                         <div>
                                             <a href={twitterHref} target="_blank"><span className="glyphicon glyphicon-comment"></span></a>
                                         </div>
