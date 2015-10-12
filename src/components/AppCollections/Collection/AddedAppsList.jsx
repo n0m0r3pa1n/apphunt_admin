@@ -96,6 +96,8 @@ export default class AddedAppsList extends React.Component {
                                         ({userType})
                                         <br />
                                         {twitterLink} {mailTo}
+                                        <br/>
+                                        <img src={app.createdBy.profilePicture} width={50} />
                                     </td>
                                     <td className="col-md-2">
                                         {app.votesCount}
