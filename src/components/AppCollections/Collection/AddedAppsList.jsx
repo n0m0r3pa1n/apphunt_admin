@@ -69,11 +69,11 @@ export default class AddedAppsList extends React.Component {
                     {
                         Object.keys(apps).map( (field, i) => {
                             let app = apps[i]
-                            let userType = app.createdBy.loginType != 'fake' ? '(real)' : ''
+                            let userType = app.createdBy.loginType
 
                             let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}><span className="glyphicon glyphicon-envelope"></span></a> : ""
                             let twitterHref = "https://twitter.com/" + app.createdBy.username
-                            let twitterLink = app.creatorType != 'fake' ?
+                            let twitterLink = userType == 'twitter' ?
                                 <a href={twitterHref} target="_blank"><span className="glyphicon glyphicon-comment"></span></a> :
                                 <div></div>
                             return(
@@ -93,7 +93,7 @@ export default class AddedAppsList extends React.Component {
                                     <td>
                                         {app.createdBy.name}
                                         <br />
-                                        {userType}
+                                        ({userType})
                                         <br />
                                         {twitterLink} {mailTo}
                                     </td>
