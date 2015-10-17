@@ -67,7 +67,6 @@ export var AppsAPI = {
             var toStr = DateUtils.formatDate(toDate)
             url += "&toDate=" + toStr
         }
-        console.log(url)
         $.get(url, function(data, status) {
             AppsActions.loadApps({apps: getFormattedApps(data.apps), totalCount: data.totalCount, platform: platform});
         });
@@ -84,7 +83,7 @@ function getFormattedApps(apps) {
     for(var i=0; i< apps.length; i++) {
         var app = apps[i]
         app.icon = app.icon === undefined ? "" : app.icon
-        app.creatorType = app.createdBy.loginType != 'fake' ? 'real' : 'fake'
+        app.creatorType = app.createdBy.loginType
         app.createdByMail = app.createdBy.email.indexOf('@example.com') === -1 ? app.createdBy.email : ""
         app.createdBy = app.createdBy.username !== undefined ? app.createdBy.username : ""
         newApps.push(app)

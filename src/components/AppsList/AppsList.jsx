@@ -84,7 +84,8 @@ export default class AppsList extends React.Component {
                         Object.keys(apps).map((field, i) => {
                             let app = data.apps[i]
                             let commentsPath = '#/comments/' + app._id
-                            let userType = app.creatorType != 'fake' ? '(real)' : ''
+                            let userType = app.creatorType != 'fake' ? '('+ app.creatorType +')' : ''
+                            console.log(userType)
                             let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}><span className="glyphicon glyphicon-envelope"></span></a> : ""
                             let twitterHref = "https://twitter.com/" + app.createdBy
                             let twitterLink = app.creatorType != 'fake' ?
