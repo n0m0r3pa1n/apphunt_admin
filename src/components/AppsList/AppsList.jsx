@@ -85,7 +85,6 @@ export default class AppsList extends React.Component {
                             let app = data.apps[i]
                             let commentsPath = '#/comments/' + app._id
                             let userType = app.creatorType != 'fake' ? '('+ app.creatorType +')' : ''
-                            console.log(userType)
                             let mailTo = app.createdByMail !== '' ? <a href={'mailto:' + app.createdByMail}><span className="glyphicon glyphicon-envelope"></span></a> : ""
                             let twitterHref = "https://twitter.com/" + app.createdBy
                             let twitterLink = app.creatorType != 'fake' ?
@@ -110,6 +109,8 @@ export default class AppsList extends React.Component {
                                         {app.createdBy}
                                         <br />
                                         {userType}
+                                        <br />
+                                        <img src={app.createdByPicture} width={40} />
                                         <br />
                                         {twitterLink} {mailTo} </td>
                                     <td>{app.status}</td>
