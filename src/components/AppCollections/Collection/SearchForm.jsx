@@ -4,6 +4,9 @@ import React from 'react';
 var ReactBootstrap = require('react-bootstrap')
 var Button = ReactBootstrap.Button
 import {AppsStore} from '../../../stores/AppsStore.js'
+import {UsersStore} from '../../../stores/UsersStore.js'
+
+import {UsersAPI} from '../../../api/UsersAPI.js'
 import {AppsAPI} from '../../../api/AppsAPI.js'
 import {DateUtils} from '../../../utils/DateUtils.js'
 
@@ -16,9 +19,25 @@ var moment = require('moment')
 export var SearchForm = React.createClass({
     getInitialState() {
         return {
+            loginTypes: [
+                {
+                    value: "all", label: "all"
+                },
+                {
+                    value: "fake", label: "fake"
+                }, {
+                    value: "real", label: "real"
+                }],
             fromDate: null,
             toDate: null
         };
+    },
+    componentDidMount() {
+        this.currentLoginType = "real"
+    },
+
+    _onLoginTypeChange(selectedOption) {
+        this.currentLoginType = selectedOption;
     },
 
     search() {
@@ -27,8 +46,8 @@ export var SearchForm = React.createClass({
 
         var from = this.state.fromDate != null ? this.state.fromDate.toDate() : null;
         var to = this.state.toDate != null ? this.state.toDate.toDate() : null;
-
-        AppsAPI.searchApps(query, from, to, platform, 1, 150, "approved");
+        console.log(this.currentLoginType)
+        AppsAPI.searchApps(query, from, to, platform, 1, 150, "approved", this.currentLoginType);
     },
 
     onFromChangeDate(date) {
@@ -44,7 +63,6 @@ export var SearchForm = React.createClass({
     },
 
     render() {
-
         return (
             <div className="col-lg-12">
                 <div className="form-inline col-lg-12">
@@ -59,10 +77,21 @@ export var SearchForm = React.createClass({
                     </div>
 
                 </div>
-                <div className="form-inline ">
+                <div className="form-inline">
+                    <div className="input-group-lg col-md-4">
+                        <label>User votes:</label>
+                        <Select
+                            name="platform"
+                            className="col-md-8"
+                            value={this.currentLoginType}
+                            options={this.state.loginTypes}
+                            onChange={this._onLoginTypeChange}
+                            />
+                    </div>
                     <div className="input-group-lg col-md-4">
                         <label>From:</label>
                         <DatePicker selected={this.state.fromDate} onChange={this.onFromChangeDate}/>
+
                     </div>
                     <div className="input-group-lg col-md-4">
                         <label>To:</label>

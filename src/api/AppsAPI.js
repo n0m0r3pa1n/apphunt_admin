@@ -49,7 +49,7 @@ export var AppsAPI = {
             AppsActions.receiveApps({apps: data.apps, date: DateUtils.getDoubleDigitDate(data.date), totalCount: data.totalCount, platform: lastAppsPlatform});
         });
     },
-    searchApps: function(query, fromDate, toDate, platform, page, pageSize, status) {
+    searchApps: function(query, fromDate, toDate, platform, page, pageSize, status, userLoginType) {
         console.log(query)
         var url = baseURL + "apps?platform=" + platform
         if(query) {
@@ -67,6 +67,11 @@ export var AppsAPI = {
             var toStr = DateUtils.formatDate(toDate)
             url += "&toDate=" + toStr
         }
+
+        if(userLoginType != undefined) {
+            url += "&userType="  + userLoginType
+        }
+
         $.get(url, function(data, status) {
             AppsActions.loadApps({apps: getFormattedApps(data.apps), totalCount: data.totalCount, platform: platform});
         });
