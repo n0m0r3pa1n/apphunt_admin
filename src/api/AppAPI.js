@@ -58,5 +58,17 @@ export var AppAPI = {
                 console.log("error: " + errorThrown)
             }
         });
+    },
+    deleteApp(appPackage) {
+        $.ajax({
+            url: BASE_URL + 'apps?package=' + appPackage,
+            type: 'DELETE',
+            success: function (data) {
+                AppsAPI.reloadApps();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error: " + errorThrown)
+            }
+        });
     }
 };

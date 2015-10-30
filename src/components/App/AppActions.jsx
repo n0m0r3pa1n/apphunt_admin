@@ -9,7 +9,7 @@ export default class AppActions extends React.Component {
         super();
         this._approve = this._approve.bind(this)
         this._reject = this._reject.bind(this)
-        this._edit = this._edit.bind(this)
+        this._delete = this._delete.bind(this)
     }
 
     componentDidMount() {
@@ -25,9 +25,11 @@ export default class AppActions extends React.Component {
     _reject() {
         AppAPI.changeAppStatus(this.props.app.package, 'rejected')
     }
-
-    _edit() {
-        console.log("E")
+    _delete() {
+        var r = confirm("Are you sure you want to delete " + this.props.app.name);
+        if (r == true) {
+            AppAPI.deleteApp(this.props.app.package)
+        }
     }
 
     render() {
@@ -37,6 +39,7 @@ export default class AppActions extends React.Component {
             <div className="col-md-12">
                 {approveBtn}
                 <button className="btn btn-danger" style={{marginRight: 10}} onClick={this._reject}>Reject</button>
+                <button className="btn btn-warning" style={{marginRight: 10}} onClick={this._delete}>Delete</button>
                 <EditApp app={this.props.app}/>
             </div>);
     }
