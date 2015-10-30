@@ -23,7 +23,7 @@ export var VotesAPI = {
         });
     },
     unvote: function(appId) {
-        var url = BASE_URL + "apps/votes?userId=" + getRandomUserId() + "&appId=" + appId;
+        var url = BASE_URL + "apps/votes?userId=" + UsersAPI.getRandomUserId() + "&appId=" + appId;
         $.ajax({
             url: url,
             type: 'DELETE',
