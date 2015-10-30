@@ -7,6 +7,12 @@ export var UserStatsActions = {
             actionType: StatsConstants.LOAD_USER_STATS,
             data: data
         })
+    },
+    loadEventDetails: function (data) {
+        Dispatcher.handleServerAction({
+            actionType: StatsConstants.LOAD_EVENT_DETAILS,
+            data: data
+        })
     }
 };
 

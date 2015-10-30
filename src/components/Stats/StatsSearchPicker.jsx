@@ -7,7 +7,9 @@ var Select = require('react-select');
 
 import {StatsStore} from  '../../stores/Stats/StatsStore.js'
 import {StatsActions} from '../../actions/stats/StatsActions.js'
+import {UserStatsStore} from '../../stores/Stats/UserStatsStore.js'
 import {StatsAPI} from '../../api/Stats/StatsAPI.js'
+import {UserStatsAPI} from '../../api/Stats/UserStatsAPI.js'
 import {DateUtils} from '../../utils/DateUtils.js'
 
 
@@ -27,8 +29,7 @@ export default class StatsSearchPicker extends React.Component {
             toDate: moment(),
             versions: []
         }
-        this.onSearchSubmit();
-        DateUtils.getWeeksInDate(new Date(), new Date())
+        //this.onSearchSubmit();
     }
 
     componentDidMount() {
@@ -52,17 +53,14 @@ export default class StatsSearchPicker extends React.Component {
         })
     }
 
+
     onSearchSubmit() {
         let fromDate = this.state.fromDate
         let toDate = this.state.toDate
         let version = this.version
+        let eventName = React.findDOMNode(this.refs.eventName).value;
 
-        StatsActions.changeStatsPeriod(
-            {
-                fromDate: fromDate,
-                toDate: toDate,
-                version: version
-            })
+        UserStatsAPI.getEventDetails(DateUtils.formatDate(fromDate.toDate()), DateUtils.formatDate(toDate.toDate()), eventName, version)
     }
 
     onFromDateChange(date) {
@@ -93,6 +91,10 @@ export default class StatsSearchPicker extends React.Component {
                 <div className="col-md-3">
                     <label className="col-md-3">To date:</label>
                     <DatePicker selected={this.state.toDate} onChange={this.onToDateChange}/>
+                </div>
+                <div className="col-md-3">
+                    <label className="col-md-3">Event name:</label>
+                    <input type="text" ref="eventName" placeholder="Name" value="user.opened.app.in.market" />
                 </div>
 
                 <div className="col-md-3">

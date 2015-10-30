@@ -4,43 +4,41 @@ import React from 'react';
 var lodash = require('lodash')
 import {Events} from '../../../constants/StatsEventsConstants.js';
 import {UserStatsStore} from  '../../../stores/Stats/UserStatsStore.js'
+import AppDetails from '../../App/AppDetails.jsx'
 
 export default class BasicUserStats extends React.Component {
     constructor() {
         super();
         this.state = {
-            data: {
-                event: []
-            }
+            data: {}
         }
         this.onChange = this.onChange.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this);
         this.componentWillUnmount = this.componentWillUnmount.bind(this);
-        this.findEvent = this.findEvent.bind(this)
     }
 
     componentDidMount() {
-        UserStatsStore.addChangeListener(this.onChange)
+        UserStatsStore.addEventDetailsListener(this.onChange)
     }
 
     componentWillUnmount() {
-        UserStatsStore.removeChangeListener(this.onChange)
+        UserStatsStore.removeEventDetailsListener(this.onChange)
     }
 
     onChange() {
         this.setState({
-            data: UserStatsStore.getBasicStatsData()
+            data: UserStatsStore.getEventDetails()
         })
     }
 
     render() {
-        let events = this.state.data.event;
-        let userLoggedInEvent = this.findEvent(events, Events.USER_LOGGED_IN);
-        let userCommentsEvent = this.findEvent(events, Events.USER_COMMENTED);
-        let userVotedAppEvent = this.findEvent(events, Events.USER_VOTED_APP);
-        let userRepliedEvent = this.findEvent(events, Events.USER_REPLIED_TO_COMMENT);
+        var iconStyle = {
+            width: 96
+        }
 
-        if(events.length == 0) {
+        let events = this.state.data;
+
+        if (events.length == 0) {
             return (<div></div>);
         }
 
@@ -49,40 +47,53 @@ export default class BasicUserStats extends React.Component {
                 <table className="table">
                     <thead>
                     <tr>
+                        <td>Icon</td>
                         <td>
-                            Users logged in
+                            App Name
                         </td>
                         <td>
-                            User comments
+                            Category
                         </td>
                         <td>
-                            User votes for apps
+                            Google Play Link
+                        </td>
+                        <td>
+                            Uploaded by
+                        </td>
+                        <td>
+                            Event Count
                         </td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>
-                            { userLoggedInEvent['@totalCount'] }
-                        </td>
-                        <td>
-                            { (Number(userCommentsEvent['@totalCount']) + Number(userRepliedEvent['@totalCount'])) }
-                        </td>
-                        <td>
-                            { userVotedAppEvent['@totalCount'] }
-                        </td>
-                    </tr>
+                    {
+                        Object.keys(events).map((field, i) => {
+                            let event = events[i]
+                            let app = event.app
+                            return (
+                                <tr>
+                                    <td><img src={app.icon} style={iconStyle}/></td>
+                                    <td>
+                                        {app.name}
+                                    </td>
+                                    <td>
+                                        {app.categories[0]}
+                                    </td>
+                                    <td>
+                                        <a href={app.url} target="_blank">Link</a>
+                                    </td>
+                                    <td>
+                                        {app.createdBy.loginType}
+                                    </td>
+                                    <td>
+                                        {event.count}
+                                    </td>
+                                </tr>)
+                        })
+                    }
                     </tbody>
                 </table>
             </div>
         );
-    }
-
-    findEvent(events, eventName) {
-        for(let event of events) {
-            if(event['@eventName'] === eventName) {
-                return event;
-            }
-        }
     }
 }

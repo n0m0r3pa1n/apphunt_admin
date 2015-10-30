@@ -7,8 +7,25 @@ var $ = require("jquery")
 
 export var StatsAPI = {
     getAppVersions: function() {
-        $.get(FLURRY_APP_INFO_URL, function(data) {
-            StatsActions.loadAppVersions(data);
-        })
+        $.ajax({
+            url: FLURRY_APP_INFO_URL,
+
+            // The name of the callback parameter, as specified by the YQL service
+            jsonp: "callback",
+
+            // Tell jQuery we're expecting JSONP
+            dataType: "jsonp",
+
+
+            // Work with the response
+            success: function( response ) {
+                StatsActions.loadAppVersions(data);
+            },
+            error: function(response) {
+            }
+        });
+        //$.get(FLURRY_APP_INFO_URL, function(data) {
+        //
+        //})
     }
 };
