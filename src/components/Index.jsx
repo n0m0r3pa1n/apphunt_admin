@@ -3,6 +3,8 @@
 import React from 'react';
 import AppsListPage from './AppsList/AppsListPage.jsx';
 import UserStatsPage from './Stats/Users/UserStatsPage.jsx';
+import UserActions from './Stats/UserActions/UserActions.js';
+import StatsContainer from './Stats/StatsContainer.jsx'
 import AppComments from './Comments/App/AppComments.js';
 import AppCollections from './AppCollections/AppCollections.jsx'
 import AppCollectionDetails from './AppCollections/Collection/CollectionDetails.jsx'
@@ -30,7 +32,10 @@ import Nav from './App/Nav.jsx';
             <Route name="user-collections" path="/user-collections" handler={UserCollections} />
             <Route name="user-scores" path="/user-scores" handler={UsersScores} />
             <Route name="user-collection" path="/user-collections/:collectionId" handler={UserCollection} />
-            <Route name="user-stats" path="/user-stats" handler={UserStatsPage} />
+            <Route name="user-stats" path="user-stats" handler={StatsContainer}>
+                <Route path="/user-stats/opened-app" handler={UserStatsPage} />
+                <Route path="/user-stats/user-actions" handler={UserActions} />
+            </Route>
             <Route name="users" path="/users" handler={Users} />
             <Route name="version" path="/version" handler={Version} />
         </Route>

@@ -17,6 +17,11 @@ var loadEventDetails = function (data) {
     eventDetails = data;
 }
 
+var userActions = {}
+var loadUserActions = function (data) {
+    userActions = data;
+}
+
 export var UserStatsStore = _.extend({}, EventEmitter.prototype, {
     getApps: function () {
         return data;
@@ -39,13 +44,24 @@ export var UserStatsStore = _.extend({}, EventEmitter.prototype, {
     removeEventDetailsListener: function (callback) {
         this.removeListener('eventDetails', callback);
     },
+    emitUserActions: function () {
+        this.emit("userActions")
+    },
+    addUserActionsListener: function (callback) {
+        this.on('userActions', callback)
+    },
+    removeUserActionsListener: function (callback) {
+        this.removeListener('userActions', callback);
+    },
     getBasicStatsData: function () {
         return basicData;
     },
     getEventDetails: function () {
         return eventDetails
+    },
+    getUserActions: function () {
+        return userActions
     }
-
 })
 
 Dispatcher.register(function (payload) {
@@ -84,9 +100,11 @@ function handleServerAction(payload) {
             loadEventDetails(action.data)
             UserStatsStore.emitEventDetails();
             break;
+        case StatsConstants.LOAD_USERS_ACTIONS:
+            loadUserActions(action.data)
+            UserStatsStore.emitUserActions();
+            break;
         default:
             return true;
     }
-
-
 }

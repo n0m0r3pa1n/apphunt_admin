@@ -7,7 +7,7 @@ import BasicUserStats from './BasicUserStats.jsx'
 export default class UserStatsPage extends React.Component {
     constructor() {
         super();
-
+        console.log("UserStats")
     }
 
     render() {

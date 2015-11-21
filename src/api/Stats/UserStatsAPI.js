@@ -86,5 +86,12 @@ export var UserStatsAPI = {
         })
         sortedValues.reverse()
         return sortedValues
+    },
+    getUsersActions: (fromDate, toDate) => {
+        fromDate = DateUtils.formatDate(fromDate)
+        toDate = DateUtils.formatDate(toDate)
+        $.get(`${BASE_URL}stats/users/actions?fromDate=${fromDate}&toDate=${toDate}`, function (data, status) {
+            UserStatsActions.loadUsersActions(data)
+        });
     }
 };

@@ -8,7 +8,60 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/select.css" rel="stylesheet" />
     <link href="//cdn.rawgit.com/Hacker0x01/react-datepicker/master/dist/react-datepicker.min.css" rel="stylesheet" />
+    <style>
+        .rc-collapse-content {
+            height: 0;
+            opacity: 0;
+            transition-duration: .3s;
+            transition-timing-function: ease-in;
+            overflow: hidden;
+        }
+        .rc-collapse-content-active {
+            opacity: 1;
+            height: auto;
+        }
+        .rc-collapse {
+            background-color: #f3f5f7;
+            border-radius: 3px;
+            border-top: 1px solid #d9d9d9;
+            border-left: 1px solid #d9d9d9;
+            border-right: 1px solid #d9d9d9;
+        }
+        .rc-collapse-header {
+            height: 38px;
+            line-height: 38px;
+            text-indent: 16px;
+            color: #666;
+            border-bottom: 1px solid #d9d9d9;
+        }
+        .rc-collapse-header::before {
+            display: inline-block;
+            content: '\20';
+            width: 0;
+            height: 0;
+            font-size: 0;
+            line-height: 0;
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-left: 4px solid #666666;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .rc-collapse-content {
+            color: #999;
+            padding: 0 16px;
+            background-color: #fbfbfb;
+        }
+        .rc-collapse-content-active {
+            border-bottom: 1px solid #d9d9d9;
+        }
+        .rc-collapse-item-active .rc-collapse-header::before {
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            border-top: 4px solid #666666;
+        }
 
+    </style>
 </head>
 <body>
 <div id="body">

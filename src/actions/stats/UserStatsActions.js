@@ -13,6 +13,12 @@ export var UserStatsActions = {
             actionType: StatsConstants.LOAD_EVENT_DETAILS,
             data: data
         })
+    },
+    loadUsersActions: (data) => {
+        Dispatcher.handleServerAction({
+            actionType: StatsConstants.LOAD_USERS_ACTIONS,
+            data: data
+        })
     }
 };
 

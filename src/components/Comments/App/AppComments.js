@@ -15,6 +15,7 @@ import DeleteComment from './DeleteComment.js'
 export default class AppComments extends React.Component {
     constructor(props) {
         super(props);
+        console.log("Props", props)
         this.appId = props.params.appId
 
         this.appName = props.query.appName
