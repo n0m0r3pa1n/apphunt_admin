@@ -6,6 +6,7 @@ import {UserStatsAPI} from '../../../api/Stats/UserStatsAPI.js'
 import {UserStatsStore} from '../../../stores/Stats/UserStatsStore'
 var Collapse = require('rc-collapse');
 var Panel = Collapse.Panel;
+var _ = require('lodash')
 
 export default class UserStatsPage extends React.Component {
     constructor() {
@@ -64,10 +65,21 @@ export default class UserStatsPage extends React.Component {
         let fakeVoteUsers = actions.votes.fake.length;
 
 
-        var anonymousCommentsCount = actions.comments.anonymousCommentsCount;
-        var loginnedCommentsCount = actions.comments.loginnedCommentsCount;
+        let anonymousCommentsCount = actions.comments.anonymousCommentsCount;
+        let loginnedCommentsCount = actions.comments.loginnedCommentsCount;
         let anonymousUsersCommented = actions.comments.anonymous.length
         let loginnedUsersCommented = actions.comments.loginned.length
+
+        let sortedVotes = _.sortBy(actions.votes.loginned, function(n) {
+            return n.votesCount;
+        })
+        sortedVotes.reverse()
+
+        let sortedComments = _.sortBy(actions.comments.loginned, function(n) {
+            return n.commentsCount;
+        })
+        sortedComments.reverse()
+        console.log(sortedComments[0])
 
         return (
             <div>
@@ -155,10 +167,44 @@ export default class UserStatsPage extends React.Component {
                     </tbody>
                 </table>
                 <Collapse accordion={true}>
-                    <Panel header="Votes">
-                        {anonymousVoteUsers}
+                    <Panel header="Votes Details">
+                        {
+                            Object.keys(sortedVotes).map((field, i) => {
+                                let item = sortedVotes[i]
+                                let voteDetails =
+                                    <div>
+                                        <span style={{fontSize: 16}}>{item.votesCount}</span> votes from <b>{item.user.name}</b> ({item.user.username})
+                                    </div>
+                                return ( <div style={{color: '#000'}}>{voteDetails}</div>)
+                            })
+                        }
                     </Panel>
-                    <Panel header="Comments">this is panel content2 or other</Panel>
+                    <Panel header="Comments Details">
+                        {
+                            Object.keys(sortedComments).map((field, i) => {
+                                let item = sortedComments[i]
+                                let commentDetails =
+                                    <div style={{fontSize: 20, color: '#000'}}>
+                                        <b>{item.commentsCount}</b> comments from <b>{item.user.name}</b> ({item.user.username})
+                                    </div>
+                                let commentText = Object.keys(item.comments).map((field, i) => {
+                                    let comment = item.comments[i]
+                                    return (
+                                        <div style={{color: '#000'}}>
+                                            "<i>{comment.text}</i>" - <a href={comment.app.url} target="_blank">{comment.app.name}</a> ({comment.app.package})
+                                        </div>
+                                    )
+                                })
+                                return (
+                                    <div>
+                                        {commentDetails}
+                                        {commentText}
+                                        <br />
+                                    </div>
+                                )
+                            })
+                        }
+                    </Panel>
                 </Collapse>
             </div>
         );
