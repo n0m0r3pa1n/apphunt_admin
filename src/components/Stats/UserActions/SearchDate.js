@@ -39,7 +39,7 @@ export default class SearchDate extends React.Component {
         this.fromDate = this.state.fromDate
         this.toDate = this.state.toDate
         return (
-            <div className="row">
+            <div className="">
                 <div className="col-md-3">
                     <label className="col-md-4">From date:</label>
                     <DatePicker selected={this.state.fromDate} onChange={this.onFromDateChange}/>
