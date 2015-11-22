@@ -175,7 +175,7 @@ export default class UserStatsPage extends React.Component {
                                 let voteDetails =
                                     <div>
                                         <span style={{fontSize: 16}}>{item.votesCount}</span> votes from
-                                        <b>{item.user.name}</b> ({item.user.username})
+                                        <b> {item.user.name}</b> ({item.user.username})
                                     </div>
                                 return ( <div style={{color: '#000'}}>{voteDetails}</div>)
                             })
