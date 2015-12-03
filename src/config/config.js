@@ -1,4 +1,4 @@
-export var FLURRY_BASE_URL = "http://api.flurry.com/"
+export var FLURRY_BASE_URL = "https://api.flurry.com/"
 export var FLURRY_API_ACCESS_CODE = "K3DM6PJMTV58CRN4MK6Q"
 export var FLURRY_API_KEY = "TF65K4T659FTCPXGMNG3"
 

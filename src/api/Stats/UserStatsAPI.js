@@ -51,7 +51,8 @@ export var UserStatsAPI = {
                 },
                 success: function (apps) {
                     var result = []
-                    for(var pack of packages) {
+                    for(var index in packages) {
+                        var pack = packages[index]
                         var app = _.find(apps, 'package', pack)
                         if(app != undefined) {
                             var event = _.find(sortedApps, '@name', pack)
