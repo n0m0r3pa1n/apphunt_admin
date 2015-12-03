@@ -34,12 +34,12 @@ export var UserStatsAPI = {
             this.url += "&versionName=" + version
         }
         $.get(this.url, function (data, status) {
-            let sortedApps = UserStatsAPI.get(data)
+            var sortedApps = UserStatsAPI.get(data)
             if(sortedApps.length > 100) {
                 sortedApps = sortedApps.slice(0, 100)
             }
-            let packages = []
-            for(let i=0; i < sortedApps.length; i++) {
+            var packages = []
+            for(var i=0; i < sortedApps.length; i++) {
                 packages.push(sortedApps[i]['@name'])
             }
 
@@ -50,11 +50,11 @@ export var UserStatsAPI = {
                     packages: packages
                 },
                 success: function (apps) {
-                    let result = []
-                    for(let pack of packages) {
-                        let app = _.find(apps, 'package', pack)
+                    var result = []
+                    for(var pack of packages) {
+                        var app = _.find(apps, 'package', pack)
                         if(app != undefined) {
-                            let event = _.find(sortedApps, '@name', pack)
+                            var event = _.find(sortedApps, '@name', pack)
                             result.push({app: app, count: event['@totalCount']})
                         }
                     }
@@ -71,7 +71,8 @@ export var UserStatsAPI = {
     get: function (eventDetails) {
         var values = []
         if(Array.isArray(eventDetails.parameters.key)) {
-            for(let key of eventDetails.parameters.key) {
+            for(var index in eventDetails.parameters.key) {
+                var key = eventDetails.parameters.key[index]
                 if(key["@name"] == "appPackage") {
                     values = key.value
                     break
@@ -81,7 +82,7 @@ export var UserStatsAPI = {
             values = eventDetails.parameters.key.value
         }
 
-        let sortedValues = _.sortBy(values, function(value) {
+        var sortedValues = _.sortBy(values, function(value) {
             return Number(value["@totalCount"])
         })
         sortedValues.reverse()
