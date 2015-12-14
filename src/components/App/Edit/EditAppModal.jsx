@@ -29,7 +29,8 @@ export var EditAppModal = React.createClass({
 
     _updateApp() {
         let appDescription = React.findDOMNode(this.refs.description).value;
-        let createdAt = this.state.selectedDate.toDate()
+        this.state.selectedDate
+        let createdAt = this.state.selectedDate.hours(5).minutes(0).toDate()
         AppAPI.updateApp(this.appPackage, createdAt, appDescription, this.status)
     },
     componentDidMount() {
