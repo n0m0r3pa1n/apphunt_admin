@@ -35,6 +35,10 @@ export var UserStatsAPI = {
         }
         $.get(this.url, function (data, status) {
             var sortedApps = UserStatsAPI.get(data)
+            var eventsCount = 0
+            for(var i=0; i < sortedApps.length; i++) {
+                eventsCount += Number(sortedApps[i]['@totalCount'])
+            }
             if(sortedApps.length > 100) {
                 sortedApps = sortedApps.slice(0, 100)
             }
@@ -60,7 +64,7 @@ export var UserStatsAPI = {
                         }
                     }
 
-                    UserStatsActions.loadEventDetails(result)
+                    UserStatsActions.loadEventDetails({result: result, eventsCount: eventsCount})
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log("error: " + errorThrown)

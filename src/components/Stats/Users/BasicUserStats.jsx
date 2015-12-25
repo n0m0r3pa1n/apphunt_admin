@@ -10,7 +10,10 @@ export default class BasicUserStats extends React.Component {
     constructor() {
         super();
         this.state = {
-            data: {}
+            data: {
+                result: [],
+                eventsCount: 0
+            }
         }
         this.onChange = this.onChange.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -36,7 +39,8 @@ export default class BasicUserStats extends React.Component {
             width: 96
         }
 
-        let events = this.state.data;
+        let events = this.state.data.result;
+        let eventsCount = this.state.data.eventsCount;
 
         if (events.length == 0) {
             return (<div></div>);
@@ -44,6 +48,7 @@ export default class BasicUserStats extends React.Component {
 
         return (
             <div>
+                Total events count {eventsCount}
                 <table className="table">
                     <thead>
                     <tr>
@@ -70,6 +75,7 @@ export default class BasicUserStats extends React.Component {
                         Object.keys(events).map((field, i) => {
                             let event = events[i]
                             let app = event.app
+                            eventsCount += event.count
                             return (
                                 <tr>
                                     <td><img src={app.icon} style={iconStyle}/></td>
