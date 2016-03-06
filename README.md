@@ -1,6 +1,17 @@
-# [Gulp, React, Babel, Browserify, Browser-Sync](https://github.com/n0m0r3pa1n/babel_browserify_gulp_react_template) - Example Project
+# AppHunt Admin
 
-## Installation
+This is the admin panel for the AppHunt project.
+
+# What is this about?
+
+From this panel you can:
+
+* Approve/Reject/Edit/Delete apps
+* Create app/user collections
+* Review stats about how is the Android app doing
+* Review user actions
+
+# Installation
 After cloning the repository, install dependencies:
 ```
 cd <project folder>
